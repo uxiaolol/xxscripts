@@ -1,0 +1,10 @@
+[SOURCE]
+1\SOURCEFILE=D:/xxscripts/xxscripts/Demo/xsp/src/main.lua
+size=1
+
+[UI]
+1\UIFILE=D:/xxscripts/xxscripts/Demo/xsp/ui/ui.json
+size=1
+
+[RES]
+size=0
