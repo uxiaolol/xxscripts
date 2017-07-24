@@ -1,6 +1,9 @@
 [SOURCE]
 1\SOURCEFILE=D:/xxscripts/xxscripts/Demo/xsp/src/main.lua
-size=1
+size=4
+2\SOURCEFILE=D:/xxscripts/xxscripts/Demo/xsp/src/Utilities.lua
+3\SOURCEFILE=D:/xxscripts/xxscripts/Demo/xsp/src/monster.lua
+4\SOURCEFILE=D:/xxscripts/xxscripts/Demo/xsp/src/data_720_1280.lua
 
 [UI]
 1\UIFILE=D:/xxscripts/xxscripts/Demo/xsp/ui/ui.json
