@@ -1,0 +1,78 @@
+{
+	"style" : "default",
+	"config" : "save_netease_yys.dat",
+	"width" : 540,
+	"height" : 960,
+	"cancelname" : "取消",
+	"okname" : "确定",
+	"views" : [
+							{
+							"type": "Label",
+							"text": "请认真勾选以下选项(脚本使用问题加群596042338)",
+							"size": 25,
+							"align": "center",
+							"color": "255,0,0"
+							},
+							{
+							"type": "Label",
+							"text": "分享设置(分享按钮消失30s脚本会自动重启)",
+							"size": 20,
+							"align": "center",
+							"color": "0,0,255"
+							},
+								{
+									"id" : "choice",
+									"list" : "腾讯微信分享,新浪微博分享,不分享(垃圾模拟器赔我按钮)",
+									"select" : "0",
+									"size" : "20",
+									"type" : "RadioGroup",
+									"orientation" : "vertical" //选项排布方式为竖排
+								},
+								{
+							"type": "Label",
+							"text": "抽卡设置",
+							"size": 20,
+							"align": "center",
+							"color": "0,0,255"
+							},
+								{
+									"id" : "chouka",
+									"list" : "抽卡(有一次爽一次),不抽卡(我要攒起来爽个够)",
+									"select" : "0",
+									"size" : "20",
+									"type" : "RadioGroup",
+									"orientation" : "vertical" //选项排布方式为竖排
+								},							
+							{
+							"type": "Label",
+							"text": "记录设置(蛊惑鸟已经加入)",
+							"size": 20,
+							"align": "center",
+							"color": "0,0,255"
+							},								
+							{
+									"id" : "jilu",
+									"list" : "记录全部(适用非洲难民),只记录ssr(适用欧洲皇室)",
+									"select" : "0",
+									"size" : "20",
+									"type" : "RadioGroup",
+									"orientation" : "vertical" //选项排布方式为竖排
+								},
+								
+								{"type": "Label",
+							"text": "截图保存ssr(包含鸟姐)",
+							"size": 20,
+							"align": "center",
+							"color": "0,0,255"
+							},								
+							{
+									"id" : "jietu",
+								"list" : "截图保存,不截图",
+									"select" : "0",
+									"size" : "20",
+									"type" : "RadioGroup",
+									"orientation" : "vertical" //选项排布方式为竖排
+								}
+
+	]
+}

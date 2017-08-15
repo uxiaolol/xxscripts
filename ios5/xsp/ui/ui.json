@@ -1,0 +1,33 @@
+{
+	"style" : "default",
+	"config" : "save_netease_yys.dat",
+	"width" : 540,
+	"height" : 960,
+	"cancelname" : "取消",
+	"okname" : "确定",
+	"views" : [
+							{
+							"type": "Label",
+							"text": "请认真勾选以下选项(脚本使用问题加群320899654)",
+							"size": 25,
+							"align": "center",
+							"color": "255,0,0"
+							},
+							{
+							"type": "Label",
+							"text": "请保持手机home键在右边，阴阳师头像在左上角",
+							"size": 25,
+							"align": "center",
+							"color": "255,0,0"
+							},
+					
+								{
+									"id" : "chouka",
+									"list" : "抽卡,不抽卡",
+									"select" : "0",
+									"size" : "20",
+									"type" : "RadioGroup",
+									"orientation" : "vertical" //选项排布方式为竖排
+								}
+	]
+}

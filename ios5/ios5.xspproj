@@ -1,0 +1,10 @@
+[SOURCE]
+1\SOURCEFILE=E:/xxAssistant/ios5/xsp/src/main.lua
+size=1
+
+[UI]
+1\UIFILE=E:/xxAssistant/ios5/xsp/ui/ui.json
+size=1
+
+[RES]
+size=0
