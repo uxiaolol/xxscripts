@@ -1,0 +1,19 @@
+{
+	"style" : "default",
+	"config" : "save_monster.dat",
+	"width" : 540,
+	"height" : 960,
+	"cancelscroll" : true,
+	"countdown" : 10,
+	"cancelname" : "取消",
+	"okname" : "确定",
+	"views" : [
+						{
+							"type": "Label",
+							"text": "###请在游戏主界面运行脚本###\n(脚本使用问题加群660835498)",
+							"size": 50,
+							"align": "center",
+							"color": "255,0,0"
+							}
+	]
+}

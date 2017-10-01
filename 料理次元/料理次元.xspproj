@@ -1,0 +1,14 @@
+[SOURCE]
+1\SOURCEFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/src/G_ui.lua
+2\SOURCEFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/src/data_720_1280.lua
+size=5
+3\SOURCEFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/src/level.lua
+4\SOURCEFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/src/main.lua
+5\SOURCEFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/src/Utilities.lua
+
+[UI]
+1\UIFILE=D:/mygithub/xxscripts/\x6599\x7406\x6b21\x5143/xsp/ui/ui.json
+size=1
+
+[RES]
+size=0

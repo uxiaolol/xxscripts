@@ -2,7 +2,7 @@ require "monster"
 
 init(0,0)
 mSleep(1000)
-
+--test
 uiRet,ui = showUI("ui.json")
 if uiRet == 1 then
 	toast("开始冒险")

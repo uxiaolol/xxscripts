@@ -1,0 +1,43 @@
+{
+	"style" : "default",
+	"config" : "save_monster.dat",
+	"width" : 960,
+	"height" : 540,
+	"cancelscroll" : true,
+	"countdown" : 10,
+	"cancelname" : "取消",
+	"okname" : "确定",
+	"views" : [
+			{
+				"text" : "基本设置",
+				"type" : "Page",
+				"views":[
+						{
+							
+						},
+						{
+							"type": "Label",
+							"text": "@进群660835498免费领激活码@)",
+							"size": 30,
+							"align": "center",
+							"color": "0,0,0"
+						},
+						{
+							"type": "Label",
+							"text": "○请主厨大人请选择关卡(V0.0.2)",
+							"size": 20,
+							"align": "left",
+							"color": "255,0,0"
+            },
+            {
+               "id" : "ComboBox1",
+               "list" : "和风岛-6(大吟酿噢),美利坚大陆-6,道场一战到底,敬请期待^_^",
+               "select" : "0",
+               "size" : 20,
+               "type" : "ComboBox"
+            }
+						
+					]	
+			}				
+	]
+}
