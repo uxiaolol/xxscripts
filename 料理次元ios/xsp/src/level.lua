@@ -2,11 +2,11 @@ require "Utilities"
 require "iphone6s"
 
 function 欧罗巴1_6(team)
-	--id = createHUD()
+	id = createHUD()
 	local count = 1
 	local _tx = 0
 	while 1 do
-		--showHUD(id,string.format("群660835498 普通欧罗巴-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
+		showHUD(id,string.format("群660835498 普通欧罗巴-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
 		if MulColor(主界面.出发) then
 			click(x,y)
 		elseif MulColor(探险界面.探险) and MulColor(探险界面.欧罗巴) then
@@ -54,11 +54,11 @@ function 欧罗巴1_6(team)
 end
 
 function 美利坚1_6(team)
-	--id = createHUD()
+	id = createHUD()
 	local count = 1
 	local _tx = 0
 	while 1 do
-		--showHUD(id,string.format("群660835498 普通美利坚-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
+		showHUD(id,string.format("群660835498 普通美利坚-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
 		if MulColor(主界面.出发) then
 			click(x,y)
 		elseif MulColor(探险界面.探险) and MulColor(探险界面.美利坚) then
@@ -129,11 +129,11 @@ function 美利坚1_6(team)
 end
 
 function 和风岛1_6(team)	
-	--id = createHUD()
+	id = createHUD()
 	local count = 1
 	local _tx = 0
 	while 1 do
-		--showHUD(id,string.format("群660835498 和风岛-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
+		showHUD(id,string.format("群660835498 和风岛-6,%s,第%d次",team,count),25,"0xffff0000","0xffffffff",0,336,0,600,45)
 		if MulColor(主界面.出发) then
 			click(x,y)
 		elseif MulColor(探险界面.探险) and MulColor(探险界面.和风岛) then

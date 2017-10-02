@@ -223,7 +223,7 @@ function 次元小屋1_6(team,sell)
 		showHUD(id,string.format("群660835498 次元小屋-6,第%d次",count),20,"0xffff0000","0xffffffff",0,332,679,500,30)
 		if MulColor(主界面.出发) then
 			click(x,y)		
-		elseif MulColor(探险界面.探险) and MulColor(探险界面.次元小屋) then
+		elseif MulColor(探险界面.探险) and (MulColor(探险界面.次元小屋) or MulColor(探险界面.次元小屋1) )then
 			click(x,y)
 		elseif MulColor(关卡界面.普通) and MulColor(关卡界面.探险) then
 			click(x,y)mSleep(2000)
