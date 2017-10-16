@@ -294,6 +294,24 @@ function 次元小屋1_6(team,sell)
 	end	
 end
 
+function 中华大陆1_6(team,sell)
+	id = createHUD()
+	local count = 1
+	local _tx = 0
+	local _teamone = false
+	local _teamtwo = false
+	while 1 do
+		showHUD(id,string.format("群660835498 中华大陆-6,第%d次",count),20,"0xffff0000","0xffffffff",0,332,679,500,30)	
+		if 
+		elseif MulColor(弹窗.食灵) and MulColor(弹窗.去整理) then
+			食灵回收()		
+		elseif sell == "寄售"	and MulColor(弹窗.寄售) then
+			click(x,y)
+		elseif sell == "自己用"	and MulColor(弹窗.自己用) then
+			click(x,y)				
+	end
+end
+
 function 强化()
 	local xzsl = 0
 	local tjsl = 0
