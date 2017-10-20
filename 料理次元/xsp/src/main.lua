@@ -9,7 +9,7 @@ local w_,h_ = getScreenSize() --w < h
 local h = w_
 local w = h_
 ui:new(w,h)
-local p = ui:newPage("通用设置v0.0.9")
+local p = ui:newPage("通用设置v0.1.0")
 p:newLine()
 p:addLebel(2,1,"感谢G_UI") 
 p:newLine()
