@@ -1,0 +1,14 @@
+[SOURCE]
+1\SOURCEFILE=E:/xxscripts/xxscripts/soul/xsp/src/data_720_1280.lua
+2\SOURCEFILE=E:/xxscripts/xxscripts/soul/xsp/src/soul_function.lua
+3\SOURCEFILE=E:/xxscripts/xxscripts/soul/xsp/src/G_ui.lua
+4\SOURCEFILE=E:/xxscripts/xxscripts/soul/xsp/src/main.lua
+5\SOURCEFILE=E:/xxscripts/xxscripts/soul/xsp/src/Utilities.lua
+size=5
+
+[UI]
+1\UIFILE=E:/xxscripts/xxscripts/soul/xsp/ui/ui.json
+size=1
+
+[RES]
+size=0

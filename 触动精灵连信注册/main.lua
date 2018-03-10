@@ -469,16 +469,20 @@ end
 function newPhoneByNZT()
 	myToast("NZT一键新机...")
 	local nztInterface = {0xffffff,"0|3|0xffffff,0|7|0xffffff,2|7|0x007aff,2|2|0x007aff,4|2|0x007aff,4|6|0x007aff,7|6|0xffffff,7|3|0xffffff", 90, 303, 1036, 325, 1062}
+	--local exitNztButton = {}
 	appKillAndRun("NZT")
 	while 1 do
 		if MulcolorNoOffset_xx_model(nztInterface) then
 			--使用命令进行一件新机
 			openURL("nzt://cmd/newrecord");
-			mSleep(3000)
+			for i=1,8 do
+				toast(string.format("等待NZT一键新机结束还剩%s秒",8-i))
+				mSleep(1500)
+			end
 			--appKill("NZT")
-			 keyDown('HOME')
-			 mSleep(500)
-			 keyUp('HOME')
+			pressHomeKey(0);    --按下 Home 键
+			pressHomeKey(1);    --抬起 Home 键
+			mSleep(2000)
 			break
 		else
 			appRun("NZT")
@@ -532,7 +536,7 @@ function lianxinRegister()
 		elseif  _code and MulcolorNoOffset_xx_model(commitByCode) then
 			click(x,y)
 			myToast("验证码输入完毕点击提交...")
-		elseif MulcolorNoOffset_xx_model(commitNoCode) then
+		elseif _code == false and MulcolorNoOffset_xx_model(commitNoCode) then
 			Tmp.Code = Tmp.getVcodeAndReleaseMobile()
 			--local str = parasevCode(Tmp.Code)
 			notifyMessage(string.format("第%s次接码,验证码为:%s",_count,Tmp.Code))mSleep(2000)
@@ -686,11 +690,13 @@ contents = {
 "有点想看视频",
 }
 --扔一个
-throwAbottle = {0xffffff,"5|0|0xffffff,5|3|0x686c72,5|7|0x7c7d7c,2|7|0xffffff,2|4|0xffffff,0|4|0x65676f,0|6|0x727375", 90, 63, 1094, 81, 1111}
+throwAbottle = {0xffffff,"5|0|0xffffff,5|3|0x686c72,5|7|0x7c7d7c,2|7|0xffffff,2|4|0xffffff,0|4|0x65676f,0|6|0x727375", 80, 63, 1094, 81, 1111}
 --捡一个
-pickUpAbottle = {0xf5f5f4,"5|0|0xfafaf9,5|3|0xb2afa9,2|3|0xffffff,1|3|0xb7b6b0,1|7|0xb0afa9,1|12|0xffffff,4|12|0xffffff", 90, 287, 1098, 307, 1121}
+pickUpAbottle = {0xf5f5f4,"5|0|0xfafaf9,5|3|0xb2afa9,2|3|0xffffff,1|3|0xb7b6b0,1|7|0xb0afa9,1|12|0xffffff,4|12|0xffffff", 80, 287, 1098, 307, 1121}
 --我的瓶子
-myBottle = {0xffffff,"0|5|0xffffff,0|9|0xffffff,2|9|0x8c8985,4|9|0x93918b,4|7|0x8b8883,4|5|0xf2f2f1,4|3|0x8e8c85", 90, 517, 1097, 530, 1120}
+myBottle = {0xffffff,"0|5|0xffffff,0|9|0xffffff,2|9|0x8c8985,4|9|0x93918b,4|7|0x8b8883,4|5|0xf2f2f1,4|3|0x8e8c85", 80, 517, 1097, 530, 1120}
+--我的瓶子有红点
+myBottleRed = {0xf95645,"0|3|0xf95645,0|8|0xf95645", 85, 543, 1059, 566, 1083}
 --按住说话
 sayByTap = {0x646464,"0|8|0x646464,10|8|0xfafafa,13|8|0xfafafa,15|8|0x646464,15|3|0x646464,12|3|0xfafafa,8|3|0xfafafa", 90, 410, 1089, 433, 1108}
 --键盘图标
@@ -705,7 +711,8 @@ backToDriftBottle = {0xffffff,"8|0|0xffffff,8|3|0x059b64,10|3|0xffffff,13|3|0x05
 firstRedMessage = {0xf95645,"0|3|0xf95645,0|8|0xf95645,0|10|0xf95645,3|10|0xf95645,3|7|0xf95645,3|3|0xf95645", 90, 97, 135, 118, 159}
 --第二个有回复的
 secondRedMessage = {0xf95645,"0|3|0xf95645,0|8|0xf95645,4|8|0xf95645,4|5|0xf95645,4|2|0xf95645,4|0|0xf95645", 90, 96, 274, 119, 295}
-thirdRedMessage = {0xf95645,"0|2|0xf95645,0|7|0xf95645,0|10|0xf95645,4|10|0xf95645,4|7|0xf95645,4|5|0xf95645,4|3|0xf95645", 90, 97, 408, 118, 431}
+--所有红点
+thirdRedMessage = {0xf95645,"0|4|0xf95645,0|10|0xf95645,4|10|0xf95645,4|7|0xf95645,4|0|0xf95645,4|-3|0xf95645", 85, 119, 129, 136, 795}
 --点击回复消息之后左上角返回连信
 backLianxinIcon = {0xffffff,"7|0|0xffffff,7|3|0x059b64,3|3|0x059b64,3|7|0xffffff,7|7|0xffffff,7|5|0x059b64,4|5|0x059b64", 90, 96, 83, 117, 100}
 --点击回复消息之后右上角小人图标
@@ -714,6 +721,7 @@ rightUserIcon = {0xffffff,"3|0|0xffffff,6|0|0xffffff,6|5|0x059b64,3|5|0x059b64,-
 deleteDriftBottle = {0xffffff,"0|6|0xffffff,0|8|0xffffff,4|8|0xff3b30,4|5|0xff3b30,4|3|0xff3b30,6|3|0xffffff,6|6|0xffffff,6|8|0xffffff", 90, 536, 314, 549, 332}
 --滑动点击删除之后手机底部出现的删除
 deleteBottom = {0xe64441,"0|3|0xe64441,0|9|0xe64441,3|9|0xfdfdfd,3|5|0xfdfdfd,3|3|0xfdfdfd,6|3|0xe64340,6|7|0xe64340", 90, 246, 955, 260, 977}
+
 --丢瓶子
 function lookForfriends()
 	myToast("丢瓶子...")
@@ -747,7 +755,8 @@ function lookForfriends()
 			click(164,659)
 			myToast("点击地区...")
 		elseif _location == false and MulcolorNoOffset_xx_model(userInfoLocation) then
-			click(155,486)
+			click(322,835)mSleep(1000)
+			click(322,835)mSleep(1000)
 			myToast("选择安道尔...")
 			_location = true
 		elseif _gender and _location and MulcolorNoOffset_xx_model(useDriftBottleButton) then
@@ -759,7 +768,10 @@ function lookForfriends()
 		elseif MulcolorNoOffset_xx_model(sayByTap) and MulcolorNoOffset_xx_model(keyBoardIcon) then
 			click(x,y)
 			myToast("点击键盘")
-		elseif _throw and tonumber(retTable[3])==0 and MulcolorNoOffset_xx_model(myBottle) then
+		elseif _throw and tonumber(retTable[3])==0 and MulcolorNoOffset_xx_model(myBottle) and MulcolorNoOffset_xx_model(myBottleRed) == false then	
+			myToast("瓶子没有回应,瓶子消息回应完毕...")
+			break
+		elseif _throw and tonumber(retTable[3])==0 and MulcolorNoOffset_xx_model(myBottle) and MulcolorNoOffset_xx_model(myBottleRed) then
 			click(x,y)
 			myToast("点击我的瓶子...")
 		elseif MulcolorNoOffset_xx_model(throwOutBottle) then
@@ -788,14 +800,16 @@ function lookForfriends()
 			click(x,y)
 			myToast("点击返回连信...")
 		elseif _answer == false and MulcolorNoOffset_xx_model(backLianxinIcon) and MulcolorNoOffset_xx_model(rightUserIcon) then
-			click(289,1088)mSleep(1000)
-			inputText("看 我 头 像~~~~~")mSleep(1000)
+			click(289,1088)mSleep(2000)
+			inputText("看 我 头 像~~~~~")mSleep(1500)
 			click(365,1080)mSleep(1000)
 			click(563,1088)mSleep(1000)
 			_answer = true
 			myToast("回复消息...")
-		elseif MulcolorNoOffset_xx_model(deleteDriftBottle)==false and MulcolorNoOffset_xx_model(firstRedMessage) == false and MulcolorNoOffset_xx_model(secondRedMessage) == false and MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(thirdRedMessage)then
-			clickMove(543,334,353,332,20)
+		elseif MulcolorNoOffset_xx_model(deleteDriftBottle)==false and MulcolorNoOffset_xx_model(thirdRedMessage)  and MulcolorNoOffset_xx_model(secondRedMessage) == false and MulcolorNoOffset_xx_model(myBottleTitle)  then
+			clickMove(543,334,353,332,30)mSleep(1000)
+			_answer = false
+			myToast("删除第二个招呼...")
 		elseif MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(deleteDriftBottle) then
 			click(x,y)
 			myToast("点击删除...")
@@ -806,19 +820,26 @@ function lookForfriends()
 		elseif MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(thirdRedMessage)==false and MulcolorNoOffset_xx_model(backToDriftBottle) then
 			click(x,y)
 			myToast("点击返回漂流瓶...")
-			
+			appKill("com.zenmen.palmchat")
+			break
 		end
 	end
 end
 
-
+function addNewFriendAndChat()
+	
+end
 
 init("0",0)
-
-changeVpnEnable()
-newPhoneByNZT()
-lianxinRegister()
-userInfo()
-lookForfriends()
+myToast("开始运行脚本...v0.0.1")
+while 1 do
+	changeVpnEnable()
+	newPhoneByNZT()
+	mSleep(2000)
+	lianxinRegister()
+	userInfo()
+	lookForfriends()
+	myToast("单轮任务结束...")
+end
 
 
