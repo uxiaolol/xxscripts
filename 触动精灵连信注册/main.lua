@@ -629,7 +629,7 @@ function lianxinRegister()
 		--接码超时
 		if _count >= 10 then
 			runToast("接码超时")	
-			return changeAirplaneMode()
+			return false
 		--点击使用手机号登录
 		elseif _mobile == false and MulcolorNoOffset_xx_model(loadByMobileNum) then
 			click(x,y)
@@ -673,7 +673,7 @@ function lianxinRegister()
 			_count = _count + 1	
 		elseif MulcolorNoOffset_xx_model(userName) and MulcolorNoOffset_xx_model(userNameCancel) then
 			runToast("注册完毕...")
-			break
+			return true
 
 		else
 			myIsFrontApp("com.zenmen.palmchat")
@@ -784,11 +784,11 @@ userInfoLocation = {0xffffff,"0|6|0xffffff,0|11|0xffffff,4|11|0x059b64,4|4|0x059
 --使用漂流瓶
 useDriftBottleButton = {0xffffff,"3|3|0x23c031,5|3|0xffffff,8|3|0x23c031,10|3|0xffffff,13|3|0x23c031,13|2|0x23c031,13|0|0xffffff,6|0|0xffffff", 90, 310, 1044, 333, 1056}
 --扔一个
-throwAbottle = {0xffffff,"5|0|0xffffff,5|3|0x686c72,5|7|0x7c7d7c,2|7|0xffffff,2|4|0xffffff,0|4|0x65676f,0|6|0x727375", 80, 63, 1094, 81, 1111}
+throwAbottle = {0xffffff,"5|0|0xffffff,5|3|0x686c72,5|7|0x7c7d7c,2|7|0xffffff,2|4|0xffffff,0|4|0x65676f,0|6|0x727375", 70, 63, 1094, 81, 1111}
 --捡一个
-pickUpAbottle = {0xf5f5f4,"5|0|0xfafaf9,5|3|0xb2afa9,2|3|0xffffff,1|3|0xb7b6b0,1|7|0xb0afa9,1|12|0xffffff,4|12|0xffffff", 80, 287, 1098, 307, 1121}
+pickUpAbottle = {0xf5f5f4,"5|0|0xfafaf9,5|3|0xb2afa9,2|3|0xffffff,1|3|0xb7b6b0,1|7|0xb0afa9,1|12|0xffffff,4|12|0xffffff", 70, 287, 1098, 307, 1121}
 --我的瓶子
-myBottle = {0xffffff,"0|5|0xffffff,0|9|0xffffff,2|9|0x8c8985,4|9|0x93918b,4|7|0x8b8883,4|5|0xf2f2f1,4|3|0x8e8c85", 80, 517, 1097, 530, 1120}
+myBottle = {0xffffff,"0|5|0xffffff,0|9|0xffffff,2|9|0x8c8985,4|9|0x93918b,4|7|0x8b8883,4|5|0xf2f2f1,4|3|0x8e8c85", 70, 517, 1097, 530, 1120}
 --我的瓶子有红点
 myBottleRed = {0xf95645,"0|3|0xf95645,0|8|0xf95645", 85, 543, 1059, 566, 1083}
 --按住说话
@@ -1015,7 +1015,7 @@ function addNewFriendAndChat()
 			click(x,y)
 			myToast("点击接受...")mSleep(1000)
 			local tt = os.time()
-			while os.difftime(os.time,tt) < 10 do
+			while os.difftime(os.time(),tt) < 10 do
 				if MulcolorNoOffset_xx_model(sendMessageButton) then
 					break
 				end
@@ -1046,13 +1046,20 @@ function addNewFriendAndChat()
 	end
 end
 
+function allSteps()
+
+end
+
 init("0",0)
-runToast("开始运行脚本...v3.10.02")
+runToast("开始运行脚本...v3.10.03")
 while 1 do
+	::START::
 	changeVpnEnable()
 	newPhoneByNZT()
 	mSleep(2000)
-	lianxinRegister()
+	if lianxinRegister() == false then 
+		goto START
+	end
 	userInfo()
 	lookForfriends()
 	replyMessage()
