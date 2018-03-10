@@ -460,7 +460,7 @@ function changeVpnEnable()
 	end
 	setVPNEnable(true)
 	for j=1,5 do
-		toast(string.format("连接vpn,等待剩余时间%s秒",5-i))
+		toast(string.format("连接vpn,等待剩余时间%s秒",5-j))
 		mSleep(1500)
 	end
 end
