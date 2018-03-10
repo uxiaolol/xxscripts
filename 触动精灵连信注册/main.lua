@@ -26,7 +26,7 @@ MyTable = {
         {
             ["type"] = "Edit",        --输入框，input1
             ["prompt"] = "请输入一个数字",--编辑框中无任何内容时显示的底色文本
-            ["text"] = "30",        --界面载入时已经存在于编辑框中的文本
+            ["text"] = "10",        --界面载入时已经存在于编辑框中的文本
 			["kbtype"] = "number",
         },		
 		{
@@ -89,7 +89,7 @@ MyTable = {
         {
             ["type"] = "Edit",        --输入框，input1
             ["prompt"] = "请输入vx",--编辑框中无任何内容时显示的底色文本
-            ["text"] = "vx:130-5540-3135",  --界面载入时已经存在于编辑框中的文本
+            ["text"] = "",  --界面载入时已经存在于编辑框中的文本
 			["kbtype"] = "defaut",
         },		
     }
@@ -836,9 +836,9 @@ function lookForfriends()
 		if _stepFinish and MulcolorNoOffset_xx_model(lookForfriendsTitle) and MulcolorNoOffset_xx_model(driftBottle) then
 			runToast("丢瓶子结束")
 			break
-		elseif _stepFinish and MulcolorNoOffset_xx_model(driftBottleTitle) and MulcolorNoOffset_xx_model(backLookForFriend) then
+		elseif _stepFinish and (MulcolorNoOffset_xx_model(driftBottleTitle) and MulcolorNoOffset_xx_model(backLookForFriend)) then
 			click(x,y)
-		elseif _stepFinish and MulcolorNoOffset_xx_model(throwAbottle) and MulcolorNoOffset_xx_model(myBottle) then
+		elseif _stepFinish and (MulcolorNoOffset_xx_model(throwAbottle) or MulcolorNoOffset_xx_model(myBottle)) then
 			click(306,434)
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) and MulcolorNoOffset_xx_model(lookForfriendsIconGrey) then
 			click(x,y)
@@ -875,7 +875,7 @@ function lookForfriends()
 			myToast("点击键盘")
 		elseif _throw and tonumber(retTable[5])==0 and MulcolorNoOffset_xx_model(myBottle) and MulcolorNoOffset_xx_model(myBottleRed) == false then	
 			myToast("瓶子没有回应,瓶子消息回应完毕...")
-			break
+			_stepFinish = true
 		elseif _throw and tonumber(retTable[5])==0 and MulcolorNoOffset_xx_model(myBottle) and MulcolorNoOffset_xx_model(myBottleRed) then
 			click(x,y)
 			myToast("点击我的瓶子...")
@@ -888,14 +888,14 @@ function lookForfriends()
 			myToast(string.format("第%s次扔瓶子",count))
 			
 			for i=1,tonumber(retTable[2]) do
-				toast(string.format("等待剩余%s秒",35-i))
+				toast(string.format("第%s次扔瓶子,等待剩余%s秒",count,tonumber(retTable[2])-i))
 				mSleep(1000)
 			end
 			count = count + 1
 			if count > tonumber(retTable[4]) then
 				_throw = true
 				for i=1,tonumber(retTable[3]) do
-					toast(string.format("全部设定次数扔完了,等待%s统一回复",40-i))
+					toast(string.format("全部设定次数扔完了,等待%s统一回复",tonumber(retTable[3])-i))
 				end
 			end
 		elseif MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(backToDriftBottle) and MulcolorNoOffset_xx_model(firstRedMessage) then
@@ -960,10 +960,10 @@ function replyMessage()
 			click(x,y)
 			myToast("点击消息...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) and MulcolorNoOffset_xx_model(messageGreen) and MulcolorNoOffset_xx_model(driftBottleMessageText) and MulcolorNoOffset_xx_model(driftBottleMessageIcon) then
-			clickMove(563,296,368,296,30)
+			clickMove(563,296,368,296,30)mSleep(1000)
 			myToast("删除漂流瓶...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) and MulcolorNoOffset_xx_model(messageGreen) and MulcolorNoOffset_xx_model(messageFirstRed)== false then
-			clickMove(563,296,368,296,30)
+			clickMove(563,296,368,296,30)mSleep(1000)
 			myToast("删除已读消息...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle)	and MulcolorNoOffset_xx_model(messageRed) and MulcolorNoOffset_xx_model(messageFirstRed) then
 			click(x,y)
@@ -1051,7 +1051,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("开始运行脚本...v3.10.03")
+runToast("开始运行脚本...v3.10.06")
 while 1 do
 	::START::
 	changeVpnEnable()
