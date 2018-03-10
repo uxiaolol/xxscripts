@@ -995,6 +995,9 @@ newFriends = {0xfa9d3b,"3|0|0xfa9d3b,7|0|0xfa9d3b,7|4|0xfa9d3b,4|5|0xfef2e3,2|5|
 newFriendsTitle = {0xffffff,"0|6|0xffffff,0|12|0xffffff,3|12|0x059b64,5|10|0x059b64,5|5|0xffffff,5|1|0x059b64,5|-1|0x059b64", 90, 281, 69, 294, 97}
 --接受按钮
 acceptButton = {0xffffff,"7|0|0xffffff,7|1|0xa6eba6,2|1|0xa6eba6,2|3|0x00c500,7|3|0x00c500,7|5|0xffffff,3|5|0xffffff", 90, 560, 207, 588, 220}
+
+--全部的添加按钮
+allAcceptButton = {0xffffff,"7|0|0xffffff,7|1|0xa6eba6,2|1|0xa6eba6,2|3|0x00c500,7|3|0x00c500,7|5|0xffffff,3|5|0xffffff", 85, 564,159,590,1114}
 --已经添加
 acceptButtonSecond = {0xffffff,"5|0|0xffffff,5|3|0x00c500,1|3|0x00c500,1|5|0xffffff,5|5|0xffffff,6|7|0x00c500,4|7|0x00c500", 90, 561, 328, 588, 343}
 --发送消息按钮
@@ -1035,11 +1038,11 @@ function addNewFriendAndChat()
 			end
 			_answer = true
 			myToast("回复消息...")			
-		elseif MulcolorNoOffset_xx_model(newFriendsTitle) and MulcolorNoOffset_xx_model(acceptButton) == false and MulcolorNoOffset_xx_model(backContact) and MulcolorNoOffset_xx_model(acceptButtonSecond) then
+		elseif MulcolorNoOffset_xx_model(newFriendsTitle) and MulcolorNoOffset_xx_model(acceptButton) == false and MulcolorNoOffset_xx_model(backContact) and (MulcolorNoOffset_xx_model(acceptButtonSecond) or MulcolorNoOffset_xx_model(allAcceptButton) ) then
 			clickMove(567,215,428,216,20)mSleep(800)
 			_answer = false
 			myToast("删除已经接受...")
-		elseif MulcolorNoOffset_xx_model(newFriendsTitle) and MulcolorNoOffset_xx_model(acceptButton) == false and MulcolorNoOffset_xx_model(backContact) and MulcolorNoOffset_xx_model(acceptButtonSecond) == false then
+		elseif MulcolorNoOffset_xx_model(newFriendsTitle) and MulcolorNoOffset_xx_model(acceptButton) == false and MulcolorNoOffset_xx_model(backContact) and MulcolorNoOffset_xx_model(allAcceptButton) == false then
 			runToast("通讯录好友处理完毕...")
 			break
 		end
@@ -1066,6 +1069,7 @@ while 1 do
 	addNewFriendAndChat()
 	runToast("单轮任务结束...")
 end
+
 
 
 
