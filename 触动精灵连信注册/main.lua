@@ -7,7 +7,7 @@ MyTable = {
     ["width"] = w/1.2,
     ["height"] = h/1.2,
     ["config"] = "save_001.dat",
-    ["timer"] = 30,
+    ["timer"] = 180,
     views = {
         {
             ["type"] = "Label",
@@ -92,6 +92,32 @@ MyTable = {
             ["text"] = "",  --界面载入时已经存在于编辑框中的文本
 			["kbtype"] = "defaut",
         },		
+				{
+            ["type"] = "Label",
+            ["text"] = "填写接码账号",
+            ["size"] = 15,
+            ["align"] = "center",
+            ["color"] = "0,0,0",
+            },
+        {
+            ["type"] = "Edit",        --输入框，input1
+            ["prompt"] = "请输入账号",--编辑框中无任何内容时显示的底色文本
+            ["text"] = "",  --界面载入时已经存在于编辑框中的文本
+			["kbtype"] = "defaut",
+        },	
+				{
+            ["type"] = "Label",
+            ["text"] = "填写接码密码",
+            ["size"] = 15,
+            ["align"] = "center",
+            ["color"] = "0,0,0",
+            },
+        {
+            ["type"] = "Edit",        --输入框，input1
+            ["prompt"] = "请输入密码",--编辑框中无任何内容时显示的底色文本
+            ["text"] = "",  --界面载入时已经存在于编辑框中的文本
+			["kbtype"] = "defaut",
+        },	
     }
 }
 local MyJsonString = cjson.encode(MyTable);
@@ -144,13 +170,13 @@ contents = {
 
 --漂流瓶回复话语
 replyDriftBottle = {
-"看 我 头 像~~~~~"
+"+好友~~~~"
 }
 
 function myToast(param)
 	if 1==2 then
 	toast(param)	
-	mSleep(2000)
+	mSleep(1500)
 	end
 end
 
@@ -167,6 +193,7 @@ if retTable[1] == 0 then
 	lua_exit(); 
 else
 	runToast(string.format("扔瓶子间隔时间为:%s,所有瓶子扔完等待时间:%s,扔漂流瓶个数为:%s,是否回复漂流瓶:%s,粉丝类型为:%s,vx号码为;%s",retTable[2],retTable[3],retTable[4],answer[tonumber(retTable[5])+1],typeFans[tonumber(retTable[6])+1],retTable[7]))
+	runToast(string.format("接码账号为%s:密码为:%s",retTable[8],retTable[9]))
 end
 
 function notifyMessage(param)
@@ -623,7 +650,7 @@ function lianxinRegister()
 	local Tmp = {}
 	local _mobile = false
 	local _code = false
-	Tmp = MobileCode("sirenyun","api_gaopanhao_fvrv","4325800","1005")
+	Tmp = MobileCode("sirenyun",retTable[8],retTable[9],"1005")
 	local _count = 1
 	while 1 do
 		--接码超时
@@ -652,7 +679,7 @@ function lianxinRegister()
 			click(x,y)
 			myToast("验证码输入完毕点击提交...")
 			
-		elseif _code == false and MulcolorNoOffset_xx_model(commitNoCode) then
+		elseif _code == false and (MulcolorNoOffset_xx_model(commitNoCode) or MulcolorNoOffset_xx_model(commitByCode)) then
 			Tmp.Code = Tmp.getVcodeAndReleaseMobile()
 			--local str = parasevCode(Tmp.Code)
 			notifyMessage(string.format("第%s次接码,验证码为:%s",_count,Tmp.Code))mSleep(2000)
@@ -700,11 +727,12 @@ itemPhoto = {0x000000,"0|4|0x000000,0|6|0x000000,7|6|0x000000,7|3|0xffffff,7|1|0
 photoShowTitle = {0xffffff,"0|3|0xf9fdfb,3|3|0x059b64,6|3|0x059b64,9|3|0x059b64,9|0|0xffffff,6|0|0xffffff", 90, 295, 76, 315, 89}
 
 --点击相机胶卷之后
-cameraPhotoTitle = {0xffffff,"0|3|0xffffff,3|3|0x059b64,7|3|0x059b64,9|3|0x059b64,9|-1|0xffffff,12|-1|0xffffff", 90, 256, 63, 279, 78}
+cameraPhotoTitle = {0xffffff,"0|3|0xffffff,3|3|0x059b64,7|3|0x059b64,9|3|0x059b64,9|-1|0xffffff,12|-1|0xffffff", 80, 256, 63, 279, 78}
 --左上角照片返回
-backPhoto = {0xffffff,"0|4|0xffffff,0|10|0xffffff,3|10|0x059b64,3|8|0x059b64,3|5|0xffffff,3|2|0x059b64,3|-1|0x059b64", 90, 43, 68, 56, 91}
+backPhoto = {0xffffff,"0|4|0xffffff,0|10|0xffffff,3|10|0x059b64,3|8|0x059b64,3|5|0xffffff,3|2|0x059b64,3|-1|0x059b64", 80, 43, 68, 56, 91}
 --选区照片按钮
 selectButton = {0xffffff,"0|8|0xffffff,4|8|0x141414,4|4|0xfafafa,4|1|0x141414,4|-1|0x141414,9|-1|0xffffff,9|2|0xffffff", 90, 576, 1044, 595, 1073}
+selectButtonGrey = {0xffffff,"0|5|0xffffff,0|10|0xffffff,3|10|0x333333,5|10|0x333333,5|4|0x333333,5|3|0x333333,5|-4|0x333333", 90, 573, 1042, 595, 1080}
 --进入连信
 enterLianxin = {0xfafefa,"0|3|0xf7fdf8,3|3|0x23c031,6|3|0x23c031,9|3|0x23c031,11|3|0x23c031,11|1|0x23c031,7|-1|0xffffff,10|-1|0xffffff,11|-1|0xffffff", 90, 361, 689, 382, 705}
 --不允许访问地理位置
@@ -721,6 +749,7 @@ function userInfo()
 	runToast("完善用户信息...")
 	math.randomseed(tostring(os.time()):reverse():sub(1,n))
 	local _name = false
+	local _openphoto = false
 	while 1 do
 		if _name==false and MulcolorNoOffset_xx_model(userName) and MulcolorNoOffset_xx_model(userNameCancel) then
 			--inputText(name[math.random(1,100)]..name[math.random(1,100)]..name[math.random(1,100)])
@@ -744,9 +773,11 @@ function userInfo()
 		elseif MulcolorNoOffset_xx_model(cameraPhotoTitle) and MulcolorNoOffset_xx_model(backPhoto) then
 			click(81,205)
 			myToast("选择第一张照片...")
-		elseif MulcolorNoOffset_xx_model(selectButton) then
+			_openphoto = true
+		elseif MulcolorNoOffset_xx_model(selectButton) or MulcolorNoOffset_xx_model(selectButtonGrey) then
 			click(x,y)
 			myToast("选取照片...")
+		
 		elseif MulcolorNoOffset_xx_model(userNameCancel)	and MulcolorNoOffset_xx_model(enterLianxin) then
 			click(x,y)
 			myToast("进入连信...")
@@ -759,6 +790,8 @@ function userInfo()
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) then
 			runToast("用户信息完毕...")
 			break
+		elseif _openphoto and (MulcolorNoOffset_xx_model(userNameCancel) ==false and MulcolorNoOffset_xx_model(enterLianxin) == false ) then
+			click(576,1060)
 		end
 	end
 end
@@ -781,6 +814,8 @@ genderMale = {0x333333,"15|0|0x333333,15|-7|0x333333,15|8|0x333333,21|5|0xffffff
 genderFamale = {0x333333,"9|0|0x333333,9|7|0xffffff,4|7|0xffffff,0|7|0xffffff,0|14|0x333333,8|17|0x333333", 90, 306, 981, 347, 1008}
 --个人信息地区title
 userInfoLocation = {0xffffff,"0|6|0xffffff,0|11|0xffffff,4|11|0x059b64,4|4|0x059b64,8|4|0xffffff,8|8|0xffffff,11|3|0x059b64,11|1|0x059b64", 90, 291, 74, 318, 95}
+--返回个人信息
+backUserInfo = {0x059b64,"5|0|0x059b64,8|0|0x059b64,8|2|0xffffff,0|2|0xffffff,0|5|0x059b64,8|5|0x059b64,8|7|0xffffff,0|7|0xffffff,0|9|0x059b64", 90, 156, 67, 181, 89}
 --使用漂流瓶
 useDriftBottleButton = {0xffffff,"3|3|0x23c031,5|3|0xffffff,8|3|0x23c031,10|3|0xffffff,13|3|0x23c031,13|2|0x23c031,13|0|0xffffff,6|0|0xffffff", 90, 310, 1044, 333, 1056}
 --扔一个
@@ -816,9 +851,9 @@ deleteDriftBottle = {0xffffff,"0|6|0xffffff,0|8|0xffffff,4|8|0xff3b30,4|5|0xff3b
 --滑动点击删除之后手机底部出现的删除
 deleteBottom = {0xe64441,"0|3|0xe64441,0|9|0xe64441,3|9|0xfdfdfd,3|5|0xfdfdfd,3|3|0xfdfdfd,6|3|0xe64340,6|7|0xe64340", 90, 246, 955, 260, 977}
 --扔瓶子界面漂流瓶title
-driftBottleTitle = {0xffffff,"0|4|0xffffff,3|4|0x059b64,5|4|0x059b64,7|4|0xffffff,10|4|0x059b64,12|4|0xc5e8db,14|4|0xffffff,14|0|0xffffff", 90, 270, 67, 298, 81}
+driftBottleTitle = {0xffffff,"0|4|0xffffff,3|4|0x059b64,5|4|0x059b64,7|4|0xffffff,10|4|0x059b64,12|4|0xc5e8db,14|4|0xffffff,14|0|0xffffff", 85, 270, 67, 298, 81}
 --返回找朋友
-backLookForFriend = {0xf7fcfa,"0|3|0xf2faf7,3|3|0x059b64,3|7|0xffffff,3|10|0x059b64,3|12|0x059b64,3|15|0xc5e8db", 90, 101, 66, 118, 90}
+backLookForFriend = {0xf7fcfa,"0|3|0xf2faf7,3|3|0x059b64,3|7|0xffffff,3|10|0x059b64,3|12|0x059b64,3|15|0xc5e8db", 85, 101, 66, 118, 90}
 --丢瓶子
 function lookForfriends()
 	runToast("丢瓶子...")
@@ -859,10 +894,10 @@ function lookForfriends()
 		elseif _gender==true and _location == false and MulcolorNoOffset_xx_model(userInfoDriftBottle) and MulcolorNoOffset_xx_model(userInfoGender) then
 			click(164,659)
 			myToast("点击地区...")
-		elseif _location == false and MulcolorNoOffset_xx_model(userInfoLocation) then
-			click(322,835)mSleep(1000)
-			click(322,835)mSleep(1000)
-			myToast("选择安道尔...")
+		elseif MulcolorNoOffset_xx_model(backUserInfo) and  MulcolorNoOffset_xx_model(userInfoLocation) then
+			click(245,750)mSleep(1000)
+			--click(322,835)mSleep(1000)
+			myToast("选择地区...")
 			_location = true
 		elseif _gender and _location and MulcolorNoOffset_xx_model(useDriftBottleButton) then
 			click(x,y)
@@ -979,6 +1014,9 @@ function replyMessage()
 			end
 			_answer = true
 			myToast("回复消息...")			
+		elseif MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(backLianxinIcon) then
+			click(x,y)
+			myToast("返回连信...")
 		end
 	end
 end
@@ -1054,7 +1092,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("开始运行脚本...v3.10.07")
+runToast("开始运行脚本...v3.11.02")
 while 1 do
 	::START::
 	changeVpnEnable()
