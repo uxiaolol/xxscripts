@@ -1,4 +1,4 @@
-
+require "TSLib"
 local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
@@ -641,7 +641,7 @@ commitNoCode = {0xffffff,"0|3|0xffffff,3|3|0x71d67a,7|3|0x71d67a,7|1|0x23c032,4|
 --输入验证码之后提交按钮
 commitByCode = {0xffffff,"0|3|0xffffff,3|3|0x23c032,7|3|0x23c032,7|4|0x71d67a,3|4|0x71d67a,3|1|0xe2f7e4,6|1|0xe2f7e4,5|2|0x23c032,7|2|0x23c032", 90, 297, 503, 316, 520}
 --你的昵称
-userName = {0x373737,"0|3|0x373737,0|8|0x202020,3|8|0x202020,3|5|0xffffff,3|1|0xffffff,4|1|0xcbcbcb,4|4|0xcbcbcb", 90, 104, 359, 117, 377}
+userName = {0x373737,"0|3|0x373737,0|8|0x202020,3|8|0x202020,3|5|0xffffff,3|1|0xffffff,4|1|0xcbcbcb,4|4|0xcbcbcb", 80, 104, 359, 117, 377}
 
 --昵称界面取消按钮
 userNameCancel = {0x23c031,"0|3|0x23c031,0|7|0x23c031,4|7|0xffffff,6|7|0xffffff,8|7|0x23c031,8|2|0x23c031,5|-1|0xffffff,3|-1|0xffffff", 90, 19, 65, 38, 87}
@@ -657,6 +657,10 @@ function lianxinRegister()
 		if _count >= 10 then
 			runToast("接码超时")	
 			return false
+		--申述
+		elseif MulcolorNoOffset_xx_model({0x007aff,"0|6|0x007aff,0|12|0x007aff,12|12|0x007aff,23|12|0x007aff,23|5|0x007aff,23|-2|0x007aff,11|-2|0x007aff", 85, 420, 702, 450, 726}) then
+			runToast("账号被限制...")	
+			return false
 		--点击使用手机号登录
 		elseif _mobile == false and MulcolorNoOffset_xx_model(loadByMobileNum) then
 			click(x,y)
@@ -664,6 +668,7 @@ function lianxinRegister()
 		elseif _mobile and MulcolorNoOffset_xx_model(nextStepByNum) then
 			click(x,y)
 			myToast("手机号码输入完毕点击下一步...")
+			mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(nextStepNoNum) then
 			Tmp.Mobile = Tmp.getMobileNum()
 			if Tmp.Mobile then
@@ -679,25 +684,47 @@ function lianxinRegister()
 			click(x,y)
 			myToast("验证码输入完毕点击提交...")
 			
-		elseif _code == false and (MulcolorNoOffset_xx_model(commitNoCode) or MulcolorNoOffset_xx_model(commitByCode)) then
+		elseif _code == false and (MulcolorNoOffset_xx_model(commitNoCode)) then
 			Tmp.Code = Tmp.getVcodeAndReleaseMobile()
 			--local str = parasevCode(Tmp.Code)
 			notifyMessage(string.format("第%s次接码,验证码为:%s",_count,Tmp.Code))mSleep(2000)
 			local key = "|"	
-			local index = string.find(Tmp.Code,key)
-			if index then
-				local ret = Split(Tmp.Code,key)
-				if #ret == 3 then
-					click( 379,568 )
-                    mSleep(2000)
-					inputText(ret[2])
-					_code = true
-				end
+			if Tmp.Code then
+				local index = string.find(Tmp.Code,key)
+				if index then
+					local ret = Split(Tmp.Code,key)
+					if #ret == 3 then
+						click( 379,568 )
+						mSleep(2000)
+						inputText(ret[2])
+						_code = true
+					end
+				end	
 			else
 				--logDebug(Tmp.Code)
 				mSleep(5000)
 			end
 			_count = _count + 1	
+		elseif _code == false and ( MulcolorNoOffset_xx_model(commitByCode)) then
+			Tmp.Code = Tmp.getVcodeAndReleaseMobile()
+			--local str = parasevCode(Tmp.Code)
+			notifyMessage(string.format("第%s次接码,验证码为:%s",_count,Tmp.Code))mSleep(2000)
+			local key = "|"	
+			if Tmp.Code then
+				local index = string.find(Tmp.Code,key)
+				if index then
+					local ret = Split(Tmp.Code,key)
+					if #ret == 3 then
+						mSleep(2000)
+						inputText(ret[2])
+						_code = true
+					end
+				end	
+			else
+				--logDebug(Tmp.Code)
+				mSleep(5000)
+			end
+			_count = _count + 1				
 		elseif MulcolorNoOffset_xx_model(userName) and MulcolorNoOffset_xx_model(userNameCancel) then
 			runToast("注册完毕...")
 			return true
@@ -785,6 +812,7 @@ function userInfo()
 			click(198,681)
 			myToast("不允许访问地理位置...")
 		elseif MulcolorNoOffset_xx_model(friendIgnore) and MulcolorNoOffset_xx_model(friednAddAll) then
+			--click(585,84)
 			click(x,y)
 			myToast("一键添加")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) then
@@ -1092,7 +1120,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("开始运行脚本...v3.11.02")
+runToast("开始运行脚本...v3.13.02")
 while 1 do
 	::START::
 	changeVpnEnable()
@@ -1107,6 +1135,8 @@ while 1 do
 	addNewFriendAndChat()
 	runToast("单轮任务结束...")
 end
+
+
 
 
 
