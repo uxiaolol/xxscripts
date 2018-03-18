@@ -1,4 +1,5 @@
 require "TSLib"
+local ocr = require "cloudOcr"
 local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
@@ -8,6 +9,8 @@ UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
 UIEdit("yimaPwd","易码密码","",15,"left","255,0,0")
+UILabel("IP切换方式")
+UICombo("ipchange","vpn,airplane")
 UIShow()
 
 
@@ -566,21 +569,55 @@ function newPhoneByNZT()
 	end
 end
 
+--好爱打码
+function haoai()
+	local op = {
+	--必填参数
+	["platform"]="haoi23", --平台类型，具体参数参照参数表
+	["x1"]=106, --需要识别区域左上角坐标
+	["y1"]=290,
+	["x2"]=527, --需要识别区域右下角坐标
+	["y2"]=354,
+	["type"]="3004", --打码类型，可在对应平台官网查询
+	["username"]="gaopanhao", --打码平台账号
+	["password"]="gaopanhao|AA8C0B5892990D1F", --打码平台密码
+	--选填参数
+	["length"]=4, --打码长度
+	["timeout"]=30, --超时时间
+	["scale"]=50, --缩放比例，范围10 - 200，在某些待识别区域过大的时候可设置此参数
+	};
+	local ret = ocr.cloudOcrText(op);
+	if ret.success then
+		return ret.text
+	else
+		return false
+	end	
+end
+
 --打开火山小视频右上角注册/登录图标
 huoshanRegIcon = {0x404040,"0|5|0x404040,0|7|0x404040,2|7|0xffffff,2|2|0xffffff,6|2|0x404040,6|5|0x404040,2|12|0xffffff,2|16|0xffffff,2|18|0xffffff", 90, 527, 71, 543, 101}
 --手机登录
-loadByMobileButton = {0xffffff,"6|0|0xffffff,11|0|0xffffff,11|3|0xff983d,8|3|0xff983e,4|3|0xff993e,3|3|0xff993e,3|6|0xffffff,7|6|0xffffff", 90, 381, 794, 407, 809}
+loadByMobileButton = {0xffffff,"0|2|0xffffff,0|4|0xffffff,5|4|0xffb744,9|4|0xffb643,12|4|0xffb242,12|0|0xffaf41,8|0|0xffaf41,6|0|0xffb242", 90, 222, 868, 250, 889}
 --点击手机登录之后注册登录后体验更多精彩瞬间
 moreInstant = {0x404040,"0|9|0x404040,5|9|0xf8f8f8,7|9|0xf8f8f8,7|3|0xf8f8f8,5|3|0xf8f8f8,5|0|0x4d4d4d,7|0|0x4d4d4d", 90, 505, 308, 523, 331}
+--手机号登录title
+loadByNumTitle = {0x808080,"9|0|0x808080,18|0|0x808080,17|4|0xf5f5f5,5|4|0xf5f5f5,1|4|0xf2f2f2,1|8|0x808080,13|8|0x808080,13|11|0xf5f5f5,3|11|0xf2f2f2", 90, 244, 194, 282, 220}
 --点击手机登录之后请输入你的手机号
-inputMobileNum = {0xb0b0b0,"0|5|0xb0b0b0,0|8|0xb0b0b0,5|8|0xb0b0b0,5|6|0xffffff,9|6|0xffffff,9|2|0xffffff,6|2|0xffffff,4|2|0xffffff", 90, 198, 458, 218, 478}
+inputMobileNum = {0xb0b0b0,"0|5|0xb0b0b0,0|13|0xb0b0b0,16|13|0xb0b0b0,16|7|0xf1f1f0,9|7|0xf2f1f1,28|7|0xf1f1f0,27|-1|0xb0b0b0,11|-1|0xb0b0b0", 90, 377, 295, 426, 321}
 --输入手机号之后下一步
-nextStepByNum = {0xffffff,"0|6|0xffffff,4|6|0xff3c19,9|6|0xff3b19,9|2|0xffffff,5|2|0xffffff,4|-1|0xff3b19,8|-1|0xff3b1a", 90, 346, 580, 367, 600}
+nextStepByNum ={0xffffff,"0|8|0xffffff,4|8|0xff3c19,9|8|0xff3b19,9|7|0xff3c19,9|4|0xffffff,9|1|0xff3b19,6|1|0xff3b1a,3|1|0xff3c19", 90, 347, 462, 368, 483}
 
 --手机号码注册title
 regByNumTitle = {0x404040,"8|0|0x404040,8|10|0x404040,1|10|0x404040,1|7|0xffffff,1|3|0xffffff,14|3|0xffffff,14|7|0xffffff,14|10|0x404040,15|0|0x404040", 90, 345, 68, 375, 89}
 --手机号码注册title的下一步按钮
 nextStepByNumButton = {0xffffff,"0|8|0xffffff,4|8|0xff3c18,8|8|0xff3c19,8|4|0xffffff,4|4|0xffffff,4|0|0xff3b19,7|0|0xff3b1a", 90, 349, 593, 369, 614}
+
+--使用密码登录
+loadByPwd = {0x404040,"0|5|0x404040,4|4|0xf8f8f8,5|3|0xf8f8f8,8|3|0x404040,11|3|0xf8f8f8,13|3|0xf8f8f8,13|6|0x404040", 90, 428, 72, 451, 89}
+--输入验证码
+inputCodeIcon = {0xb0b0b0,"0|13|0xb0b0b0,0|18|0xb0b0b0,6|16|0xf6f7f6,6|11|0xf6f6f6,6|4|0xf6f6f6,11|4|0xb0b0b0,11|15|0xb0b0b0", 90, 180, 316, 204, 353}
+--输入验证码之后登录按钮
+loadByCode = {0xffffff,"8|0|0xffffff,8|3|0xff3e17,-1|3|0xff4017,0|5|0xffffff,8|5|0xffffff,8|7|0xff3f17,0|7|0xff4117", 90, 320, 463, 345, 481}
 
 --手机号码登录title
 loadByNumTile = {0x404040,"8|0|0x404040,7|3|0x404040,5|6|0x404040,2|9|0x404040,2|4|0xffffff,2|3|0xffffff,0|3|0xffffff,0|4|0xffffff", 90, 339, 65, 355, 80}
@@ -606,37 +643,50 @@ messageIcon = {0x404040,"0|2|0x404040,5|0|0xffffff,6|0|0xffffff,10|0|0x404040,11
 userInfoIcon = {0x404040,"0|3|0x404040,0|7|0x404040,2|7|0xffffff,2|8|0xffffff,2|2|0xffffff,5|2|0x404040,5|7|0x404040", 90, 573, 1111, 585, 1130}
 --登陆成功之后屏幕底部的加号
 addIcon = {0xffffff,"0|4|0xffffff,0|6|0xffffff,3|6|0xff2d21,6|6|0xff2923,6|3|0xff2625,6|0|0xff2625,4|0|0xff2923", 90, 314, 1068, 337, 1093}
+--未登录时屏幕底部加号
+addIconUnload = {0xffffff,"0|3|0xffffff,0|8|0xffffff,4|8|0xff2b22,6|8|0xff2923,6|5|0xff2724,6|2|0xff2525,4|0|0xff2724", 90, 313, 978, 337, 1001}
 
+--请输入图片验证码
+inputPicCode = {0xcc3131,"0|4|0xcc3131,0|6|0xcc3131,3|6|0xffffff,3|2|0xffffff,7|2|0xcc3131,7|5|0xcc3131,11|5|0xffffff,11|2|0xffffff,14|2|0xcc3131", 90, 401,388,426,449}
+--键盘弹起
+keyBoardIcon = {0xd1d5db,"2|0|0xd1d5db,2|6|0x000000,-1|9|0x000000,1|12|0xd1d5db,3|12|0xd1d5db,7|12|0x000000,7|6|0xd1d5db", 90, 526, 1070, 548, 1092}
 function huoshanRegister()
 	runToast("火山小视频:开始注册...")
 	local Tmp = {}
 	Tmp = MobileCode("yima",yimaAccount,yimaPwd,"5022")
 	local _count = 1
 	local _code = false
+	local _mobile = false
 	while 1 do
-		if isFrontApp("com.ss.iphone.ugc.Live") == 1 and MulcolorNoOffset_xx_model(huoshanRegIcon) then
+		if isFrontApp("com.ss.iphone.ugc.Live") == 1 and MulcolorNoOffset_xx_model(addIconUnload) and MulcolorNoOffset_xx_model(huoshanRegIcon) then
 			click(x,y)
 			myToast("点击注册")
+		elseif _count > 10 then
+			runToast("接码超时...")
+			return false
 		elseif MulcolorNoOffset_xx_model(loadByMobileButton) then
 			click(x,y)
-		elseif MulcolorNoOffset_xx_model(moreInstant) and MulcolorNoOffset_xx_model(inputMobileNum) then
+		elseif _mobile ==false and MulcolorNoOffset_xx_model(loadByNumTitle) and MulcolorNoOffset_xx_model(inputMobileNum) then
 			Tmp.Mobile = Tmp.getMobileNum()
 			if Tmp.Mobile then
 				inputText(Tmp.Mobile)
+				_mobile = true
 			else
 				for i=1,5 do
 					toast(string.format("等待%s再次获取手机号码",5-i))
 					mSleep(1000)
 				end
 			end
-		elseif MulcolorNoOffset_xx_model(nextStepByNum) then
-			click(x,y)
+		elseif _mobile and MulcolorNoOffset_xx_model(loadByNumTitle) and MulcolorNoOffset_xx_model(nextStepByNum) then
+			click(x,y)mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(loadByNumTile) and MulcolorNoOffset_xx_model(loadButton) and MulcolorNoOffset_xx_model(forgotPwdIcon) then
 			click(x,y)
 		elseif MulcolorNoOffset_xx_model(retrievePwdTitle) and MulcolorNoOffset_xx_model(retrievePwdNextStepButton) then
 			click(x,y)	
 		--注册填写验证码界面	
-		elseif _code == false and MulcolorNoOffset_xx_model(regByNumTitle) and MulcolorNoOffset_xx_model(nextStepByNumButton) then
+		elseif _code == false and MulcolorNoOffset_xx_model(keyBoardIcon)==false and MulcolorNoOffset_xx_model(loadByPwd) and MulcolorNoOffset_xx_model(inputCodeIcon) then
+			click(x,y)
+		elseif _code == false and MulcolorNoOffset_xx_model(keyBoardIcon) and MulcolorNoOffset_xx_model(loadByPwd) and MulcolorNoOffset_xx_model(inputCodeIcon) then
 			Tmp.Code = Tmp.getVcodeAndReleaseMobile()
 			notifyMessage(string.format("第%s次接码,验证码为:%s",_count,Tmp.Code))mSleep(1000)
 			local key = "|"
@@ -663,6 +713,8 @@ function huoshanRegister()
 				mSleep(4000)
 				_count = _count + 1
 			end
+		elseif _code and MulcolorNoOffset_xx_model(loadByCode) then
+			click(x,y)
 		elseif _code and MulcolorNoOffset_xx_model(regByNumTitle) and MulcolorNoOffset_xx_model(nextStepByNumButton) then
 			click(351,401)mSleep(1000) inputText(randomstring(9))
 			if MulcolorNoOffset_xx_model(regByNumTitle) and MulcolorNoOffset_xx_model(nextStepByNumButton) then click(x,y) end
@@ -673,7 +725,15 @@ function huoshanRegister()
 			click(x,y)
 		elseif MulcolorNoOffset_xx_model(addIcon) and MulcolorNoOffset_xx_model(userInfoIcon) then
 			runToast("注册完毕...")
-			break
+			return true
+		--跳出验证码
+		elseif MulcolorNoOffset_xx_model(inputPicCode) then
+			click(x-150,y)mSleep(2000)
+			local ret = haoai()	
+			if ret then
+				inputText(ret)mSleep(1000)
+				click(446,487)mSleep(2000)
+			end
 		end		
 		myIsFrontApp("com.ss.iphone.ugc.Live")
 	end
@@ -743,16 +803,24 @@ function allSteps()
 end
 
 init("0",0)
-runToast("火山养号脚本开始运行...v3.12.02")
+runToast("火山养号脚本开始运行...v3.18.02")
 while 1 do
 	::START::
-	changeAirplaneMode()
+	if ipchange == "airplane" then
+		changeAirplaneMode()
+	elseif ipchange == "vpn" then
+		changeVpnEnable()		
+	end
 	mSleep(2000)
-	huoshanRegister()
+	if huoshanRegister() == false then
+		goto START
+	end
 	randWatch()
 	newPhoneByNZT()
 	runToast("单轮任务结束...")
 end
+
+
 
 
 
