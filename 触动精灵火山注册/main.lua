@@ -595,7 +595,7 @@ function haoai()
 end
 
 --打开火山小视频右上角注册/登录图标
-huoshanRegIcon = {0x404040,"0|5|0x404040,0|7|0x404040,2|7|0xffffff,2|2|0xffffff,6|2|0x404040,6|5|0x404040,2|12|0xffffff,2|16|0xffffff,2|18|0xffffff", 90, 527, 71, 543, 101}
+huoshanRegIcon = {0x404040,"0|5|0x404040,0|7|0x404040,2|7|0xffffff,2|2|0xffffff,6|2|0x404040,6|5|0x404040,2|12|0xffffff,2|16|0xffffff,2|18|0xffffff", 80, 527, 71, 543, 101}
 --手机登录
 loadByMobileButton = {0xffffff,"0|2|0xffffff,0|4|0xffffff,5|4|0xffb744,9|4|0xffb643,12|4|0xffb242,12|0|0xffaf41,8|0|0xffaf41,6|0|0xffb242", 90, 222, 868, 250, 889}
 --点击手机登录之后注册登录后体验更多精彩瞬间
@@ -644,7 +644,7 @@ userInfoIcon = {0x404040,"0|3|0x404040,0|7|0x404040,2|7|0xffffff,2|8|0xffffff,2|
 --登陆成功之后屏幕底部的加号
 addIcon = {0xffffff,"0|4|0xffffff,0|6|0xffffff,3|6|0xff2d21,6|6|0xff2923,6|3|0xff2625,6|0|0xff2625,4|0|0xff2923", 90, 314, 1068, 337, 1093}
 --未登录时屏幕底部加号
-addIconUnload = {0xffffff,"0|3|0xffffff,0|8|0xffffff,4|8|0xff2b22,6|8|0xff2923,6|5|0xff2724,6|2|0xff2525,4|0|0xff2724", 90, 313, 978, 337, 1001}
+addIconUnload = {0xffffff,"0|3|0xffffff,0|8|0xffffff,4|8|0xff2b22,6|8|0xff2923,6|5|0xff2724,6|2|0xff2525,4|0|0xff2724", 80, 313, 978, 337, 1001}
 
 --请输入图片验证码
 inputPicCode = {0xcc3131,"0|4|0xcc3131,0|6|0xcc3131,3|6|0xffffff,3|2|0xffffff,7|2|0xcc3131,7|5|0xcc3131,11|5|0xffffff,11|2|0xffffff,14|2|0xcc3131", 90, 401,388,426,449}
@@ -803,7 +803,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("火山养号脚本开始运行...v3.18.02")
+runToast("火山养号脚本开始运行...v3.18.03")
 while 1 do
 	::START::
 	if ipchange == "airplane" then
