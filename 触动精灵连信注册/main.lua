@@ -300,11 +300,15 @@ function MobileCode(server,uid, pwd, pid)
 				return nil	
 			end
 			local ret= Split(data,key)
-			if #ret<3 then
-				notifyMessage("玉米:登录错误"..data)
+			if ret[1] ~= "ERR" then
+				if #ret<3 then
+					notifyMessage("玉米:登录错误"..data)
+					return nil
+				end
+				return ret[3]
+			else
 				return nil
-			end
-			return ret[3]
+			end	
 		end
 		return nil
 	end
@@ -1120,7 +1124,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("开始运行脚本...v3.13.02")
+runToast("开始运行脚本...v3.20.01")
 while 1 do
 	::START::
 	changeVpnEnable()
