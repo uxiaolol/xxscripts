@@ -11,7 +11,7 @@ MyTable = {
     views = {
         {
             ["type"] = "Label",
-            ["text"] = "廖总连信设置",
+            ["text"] = "设置",
             ["size"] = 15,
             ["align"] = "center",
             ["color"] = "0,0,255",
@@ -130,23 +130,42 @@ firstname = { "太阳当空照〆","面向向阳花_","姐，已忘爱","超级�
 --男粉
 if tonumber(retTable[6]) == 0 then
 	replymessage = {
-	"加我薇信吧",
+	"我们聊点刺激的?可以看的,加我薇信吧",
 	retTable[7],
 	"骗人是小狗..你加下,薇信那边等你",
 	}
 --非男粉
 else
 	replymessage = {
-	"加下我薇信",
+	"聊点刺激的吧,可以互看身体...加下我薇信",
 	retTable[7],
 	"骗人是小狗..你加下,薇信那边等你",
 	}
 end
 --扔漂流瓶话语
 contents = {
-"男人上了年纪，不懂保养爱护自己的小弟弟，功能衰退过快，有了美女也力不从心。加我，教你独门秘籍，重振雄风！",
-"工作压力大，生活作息差，缺乏运动。姓能力每况愈下。那是你不懂保养改善。加我，独家秘籍，让你重回十八！",
-"花甲老汉宝刀不老，三十壮年却力不从心。男性保养调理你懂多少？ 加我，教你如何夜夜笙歌，次次凶悍！",
+"聊点刺激的呀?",
+"我是你老婆",
+"可以找男朋友?",
+"男朋友太差了",
+"突然想找个男朋友",
+"找个男朋友,有?",
+"敢不敢聊点刺激的?",
+"有没男朋友啊?",
+"我这样有人要??",
+"要找个男朋友",
+"会撒娇会卖萌,竟然没人要",
+"好想找个男朋友",
+"我想要找个男朋友",
+"我满18岁了",
+"这里有没男朋友",
+"有没男朋友",
+"不会卖萌怎么办",
+"找个男朋友有没",
+"找个男朋友",
+"找个男朋友啊",
+"有没有图片",
+"有点想看视频",
 }
 
 --漂流瓶回复话语
@@ -639,7 +658,7 @@ function lianxinRegister()
 	local _count = 1
 	while 1 do
 		--接码超时
-		if _count >= 20 then
+		if _count >= 10 then
 			runToast("接码超时")	
 			return false
 		--申述
@@ -1006,18 +1025,18 @@ function replyMessage()
 			break
 		elseif MulcolorNoOffset_xx_model(messageGrey) then
 			click(x,y)
-			runToast("点击消息...")
+			myToast("点击消息...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) and MulcolorNoOffset_xx_model(messageGreen) and MulcolorNoOffset_xx_model(driftBottleMessageText) and MulcolorNoOffset_xx_model(driftBottleMessageIcon) then
 			clickMove(563,296,368,296,30)mSleep(1000)
-			runToast("删除漂流瓶...")
+			myToast("删除漂流瓶...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle) and MulcolorNoOffset_xx_model(messageGreen) and MulcolorNoOffset_xx_model(messageFirstRed)== false then
 			clickMove(563,296,368,296,30)mSleep(1000)
-			runToast("删除已读消息...")
+			myToast("删除已读消息...")
 		elseif MulcolorNoOffset_xx_model(lianxinTitle)	and MulcolorNoOffset_xx_model(messageRed) and MulcolorNoOffset_xx_model(messageFirstRed) then
 			click(x,y)
-			runToast("回复第一个消息...")
+			myToast("回复第一个消息...")
 		elseif _answer and MulcolorNoOffset_xx_model(rightUserIcon) and MulcolorNoOffset_xx_model(backLianxinIcon) then
-			click(x,y)runToast("已经回复返回连信...")
+			click(x,y)
 		elseif _answer == false and MulcolorNoOffset_xx_model(backLianxinIcon) and MulcolorNoOffset_xx_model(rightUserIcon) then
 			click(289,1088)mSleep(1000)
 			for i=1,3 do
@@ -1026,10 +1045,10 @@ function replyMessage()
 				click(563,1088)mSleep(500)
 			end
 			_answer = true
-			runToast("回复消息...")			
+			myToast("回复消息...")			
 		elseif MulcolorNoOffset_xx_model(myBottleTitle) and MulcolorNoOffset_xx_model(backLianxinIcon) then
 			click(x,y)
-			runToast("返回连信...")
+			myToast("返回连信...")
 		end
 	end
 end
@@ -1105,7 +1124,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("廖总连信脚本开始运行...v3.28.01")
+runToast("开始运行脚本...v3.20.01")
 while 1 do
 	::START::
 	changeVpnEnable()
