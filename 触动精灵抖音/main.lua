@@ -94,6 +94,34 @@ function clickMove(x1,y1, x2,y2, n)
 end
 
 
+function clickMoveQQ(x1,y1, x2,y2,n)
+	local w = math.abs(x2-x1);
+	local h = math.abs(y2-y1);
+	touchDown(x1,y1); 
+	mSleep(50);
+	if x1 < x2 then
+		w1 = n; 
+	end
+	if w >= h then
+		for i = 1 , w*0.7,n do 
+			x1 = x1 + w1;
+			touchMove(x1,y1);
+			mSleep(10);
+		end
+		
+		for i=w*0.7,w,1 do
+			x1=x1+1
+			touchMove(x1,y1)
+			mSleep(10)
+		end
+	end
+	mSleep(1000);
+	touchMove(x1,y1+20)
+	mSleep(200)
+	touchUp(x1,y1+20);
+end
+
+
 --local list = Split("abc,123,345", ",")
 function Split(szFullString, szSeparator)  
     local nFindStartIndex = 1  
@@ -758,7 +786,7 @@ function loginQQ()
 			local ret = haoai()
 			if ret ~= false then
 				local x1 = Split(ret,",")
-				clickMove(135,614,x1[1]+30,614,1)mSleep(5000)
+				clickMoveQQ(135,614,x1[1]+30,614,5)mSleep(5000)
 			end
 		elseif MulcolorNoOffset_xx_model(loadFailed) then
 			click(x,y)
@@ -779,17 +807,22 @@ function loginQQ()
 end
 
 --滑动查看更多
-sliderToMore = {0xffffff,"0|3|0x1b1c26,0|7|0xffffff,0|12|0x1d1d28,-3|12|0x1e1e29,-3|6|0xffffff,-3|3|0x1c1c27", 85, 373, 882, 391, 907}
+sliderToMore = {0x2d2f39,"0|3|0x2d2f39,0|6|0x2d2f39,0|8|0x2d2f39,3|8|0x2d1a28,3|6|0x2d1a28,3|4|0x2d1a28,3|1|0x2d1a28,3|0|0x2d1a28", 85, 349, 1079, 364, 1113}
 --继续播放
 continueToPlay = {0x292b37,"0|4|0x292b37,0|8|0x292b37,-1|8|0x5a5c69,-1|4|0x5a5c69,-2|4|0xd9dbeb,-2|1|0xd8daea,-2|7|0xcfd1e0", 85, 396, 723, 408, 741}
 --抖音底部中间的加号
 moreInfo ={0x17eee8,"0|4|0x17eee8,0|7|0x17eee8,0|10|0x17eee8,3|10|0xffffff,3|7|0xffffff,3|3|0xffffff,3|2|0xffffff", 85, 271, 1064, 290, 1115}
 --通过qq登录
-loadByQQ = {0xffffff,"3|0|0xffffff,5|0|0xffffff,5|5|0xa049f4,2|5|0xa049f5,1|5|0xa048f3", 85, 244, 523, 265, 547}
+loadByQQ = {0x000000,"0|1|0x000000,3|1|0x000000,7|1|0x000000,8|1|0x000000,8|-5|0xffffff,5|-5|0xffffff,1|-5|0xffffff", 85, 239, 684, 270, 702}
+loadByQQOne = {0xface15,"3|0|0xface15,7|0|0xface15,11|0|0xface15,11|5|0xface15,7|5|0xface15,4|5|0xface15,2|5|0xface15", 85, 232, 645, 256, 659}
 --qq授权并登录
 allowAndLoad = {0xffffff,"0|3|0xffffff,4|3|0x00aced,7|3|0x00aced,7|-1|0x00aced,5|-1|0x00aced,5|-3|0xfeffff,7|-3|0xfeffff", 85, 308, 1068, 326, 1087}
 --抖音底部加号取消
 cancelIcon = {0x5b5d66,"3|0|0xffffff,3|3|0x5b5d66,0|3|0x5b5d66,0|8|0x5b5d66,3|8|0xffffff,5|8|0xffffff", 85, 286, 1073, 305, 1096}
+--登录失败
+loadFailedSure = {0x000000,"2|5|0xffffff,2|10|0xffffff,5|10|0x000000,5|4|0x000000,10|4|0xffffff,13|4|0xffffff,13|8|0x101010", 85, 321, 662, 355, 691}
+--重新授权
+reAllow = {0x00aced,"0|-3|0x00aced,4|-3|0x00aced,5|-1|0x00aced,5|2|0x00aced", 85, 17, 887, 70, 921}
 --抖音登录
 function loadDouYin()
 	runToast("抖音登录")
@@ -799,21 +832,38 @@ function loadDouYin()
 		if user and MulcolorNoOffset_xx_model(moreInfo) then
 			runToast("抖音登录完成")
 			return true
-		elseif MulcolorNoOffset_xx_model(sliderToMore) then
-			click(x,y)
 		elseif MulcolorNoOffset_xx_model(continueToPlay) then
 			click(x,y)
 		elseif user==false and MulcolorNoOffset_xx_model(moreInfo) then
 			click(x,y)
 		elseif MulcolorNoOffset_xx_model(loadByQQ) then
 			click(x,y)
+		elseif MulcolorNoOffset_xx_model(loadByQQOne) then
+			click(255,556)
 		elseif MulcolorNoOffset_xx_model(allowAndLoad) then
 			click(x,y)
 		elseif MulcolorNoOffset_xx_model(cancelIcon) then
 			click(x,y)
 			user = true
+		elseif MulcolorNoOffset_xx_model(sliderToMore) then
+			click(319,1084)			
+		elseif MulcolorNoOffset_xx_model(loadFailedSure) then
+			click(x,y)
+		elseif MulcolorNoOffset_xx_model(reAllow) then
+			click(x,y)
 		end
 		--myIsFrontApp("com.ss.iphone.ugc.Aweme")
+	end
+end
+
+--抖音关注
+function followDouYin()
+	runToast("抖音关注")
+	while 1 do
+		if MulcolorNoOffset_xx_model(sliderToMore) then
+			
+		end
+		myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
 end
 
@@ -831,6 +881,7 @@ while 1 do
 	changeAirplaneMode()
 	runToast("单轮任务结束...")
 end
+
 
 
 
