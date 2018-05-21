@@ -5,6 +5,7 @@ local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
 UINew("抖音引流脚本","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+--UILabel("作者Uxiao,QQ:234154812")
 --[[UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
@@ -823,6 +824,8 @@ cancelIcon = {0x5b5d66,"3|0|0xffffff,3|3|0x5b5d66,0|3|0x5b5d66,0|8|0x5b5d66,3|8|
 loadFailedSure = {0x000000,"2|5|0xffffff,2|10|0xffffff,5|10|0x000000,5|4|0x000000,10|4|0xffffff,13|4|0xffffff,13|8|0x101010", 85, 321, 662, 355, 691}
 --重新授权
 reAllow = {0x00aced,"0|-3|0x00aced,4|-3|0x00aced,5|-1|0x00aced,5|2|0x00aced", 85, 17, 887, 70, 921}
+--点快了跳转到手机登录同意抖音用户协议
+agreementIcon = 0xface15,"3|0|0xface15,8|0|0xface15,8|5|0xface15,3|5|0xface15,0|5|0xface15,0|9|0xface15,4|9|0xface15", 90, 359, 617, 386, 638
 --抖音登录
 function loadDouYin()
 	runToast("抖音登录")
@@ -833,35 +836,85 @@ function loadDouYin()
 			runToast("抖音登录完成")
 			return true
 		elseif MulcolorNoOffset_xx_model(continueToPlay) then
-			click(x,y)
+			click(x,y)mSleep(1000)
 		elseif user==false and MulcolorNoOffset_xx_model(moreInfo) then
-			click(x,y)
+			click(x,y)mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(loadByQQ) then
-			click(x,y)
+			click(x,y)mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(loadByQQOne) then
-			click(255,556)
+			click(255,556)mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(allowAndLoad) then
-			click(x,y)
+			click(x,y)mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(cancelIcon) then
 			click(x,y)
 			user = true
+			mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(sliderToMore) then
-			click(319,1084)			
+			click(319,1084)	
+			mSleep(1000)		
 		elseif MulcolorNoOffset_xx_model(loadFailedSure) then
 			click(x,y)
+			mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(reAllow) then
 			click(x,y)
+			mSleep(1000)
+		elseif MulcolorNoOffset_xx_model(agreementIcon) then
+			click(569,71)mSleep(1000)
 		end
 		--myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
 end
 
+--首页
+homePage = {0xffffff,"4|0|0xffffff,9|0|0xffffff,14|0|0xffffff,14|5|0xffffff,11|5|0xffffff,7|5|0xffffff,4|5|0xffffff", 90, 26, 1068, 68, 1108}
+--关闭评论
+closeCom = {0x5b5b5b,"2|2|0x5b5b5b,4|4|0x5b5b5b,3|8|0x5b5b5b,1|9|0x5b5b5b,0|11|0x5b5b5b", 90, 578, 328, 606, 356}
+--推荐
+recomIcon = {0xffffff,"4|0|0xffffff,7|0|0xffffff,7|3|0xffffff,7|5|0xffffff,7|9|0xffffff,3|7|0xffffff", 90, 238, 52, 264, 79}
+--评论区灰色爱心
+starForCom = {0x505052,"0|9|0x505052,0|13|0x505052,0|16|0x505052,8|16|0x505052,8|11|0x505052,8|8|0x505052,13|5|0x505052,13|14|0x505052,13|17|0x505052", 90, 558, 399, 622, 1039}
+--关注按钮
+followBtn = {0xffffff,"8|0|0xffffff,15|0|0xffffff,15|4|0xfe2c55,12|4|0xfe2c55,10|4|0xfe2c55,3|4|0xfe2c55,0|4|0xfe2c55", 90, 508, 252, 543, 270}
+--用户信息返回
+backToRecom = {0xbdbdbd,"-3|2|0xbcbcbd,-6|5|0xbcbcbc,-8|7|0xbcbcbc,-9|9|0xbcbcbc,-10|11|0xbcbcbc", 75, 18, 56, 57, 91}
+--发消息
+sendMessage = {}
+--键盘弹起
+keyBoard = {0xb9b9bd,"-1|3|0xb9b9bd,-2|6|0xb9b9bd,-2|9|0xb9b9bd,3|8|0xffffff,4|6|0xffffff,5|4|0xffffff,6|2|0xffffff", 90, 577, 564, 601, 589}
 --抖音关注
 function followDouYin()
 	runToast("抖音关注")
+	local _freshcts = 1
+	local _followcts = 1
+	local _slidects = 1
 	while 1 do
-		if MulcolorNoOffset_xx_model(sliderToMore) then
-			
+		if _followcts >= 78 then
+			runToast("关注完成")	
+			break
+		elseif _freshcts<=4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
+			click(x,y)
+			_freshcts = _freshcts + 1
+		elseif _followcts <= 78 and _freshcts > 4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
+			click(574,624)mSleep(2000)
+		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(closeCom) and MulcolorNoOffset_xx_model(starForCom) then
+			click(x,y)mSleep(1000)
+			click(x-530,y)mSleep(1000)
+			_slidects = 1
+		elseif MulcolorNoOffset_xx_model(followBtn) then
+			click(x,y)
+			_followcts = _followcts + 1
+			toast(_followcts)
+		elseif MulcolorNoOffset_xx_model(recomIcon)==false and MulcolorNoOffset_xx_model(followBtn) == false and MulcolorNoOffset_xx_model(backToRecom) then
+			click(x,y)mSleep(2000)
+		elseif _slidects >=3 and MulcolorNoOffset_xx_model(closeCom) then
+			click(x,y)
+			_freshcts = 1
+			_slidects = 1
+		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(closeCom) and MulcolorNoOffset_xx_model(starForCom)==false then	
+			clickMove(331,1017,337,392,5)mSleep(1000)
+			_slidects = _slidects + 1
+		elseif MulcolorNoOffset_xx_model(keyBoard) then
+			click(x,y-70)
 		end
 		myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
@@ -872,16 +925,16 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.18.01")
+runToast("抖音脚本开始运行...v05.21.01")
 while 1 do
 	loginQQ()
 	loadDouYin()
+	followDouYin()
 	modifyIndex()
 	newPhoneByNZT()
 	changeAirplaneMode()
 	runToast("单轮任务结束...")
 end
-
 
 
 
