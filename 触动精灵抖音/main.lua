@@ -825,7 +825,7 @@ loadFailedSure = {0x000000,"2|5|0xffffff,2|10|0xffffff,5|10|0x000000,5|4|0x00000
 --重新授权
 reAllow = {0x00aced,"0|-3|0x00aced,4|-3|0x00aced,5|-1|0x00aced,5|2|0x00aced", 85, 17, 887, 70, 921}
 --点快了跳转到手机登录同意抖音用户协议
-agreementIcon = 0xface15,"3|0|0xface15,8|0|0xface15,8|5|0xface15,3|5|0xface15,0|5|0xface15,0|9|0xface15,4|9|0xface15", 90, 359, 617, 386, 638
+agreementIcon = {0xface15,"3|0|0xface15,8|0|0xface15,8|5|0xface15,3|5|0xface15,0|5|0xface15,0|9|0xface15,4|9|0xface15", 90, 359, 617, 386, 638}
 --抖音登录
 function loadDouYin()
 	runToast("抖音登录")
@@ -874,7 +874,8 @@ recomIcon = {0xffffff,"4|0|0xffffff,7|0|0xffffff,7|3|0xffffff,7|5|0xffffff,7|9|0
 --评论区灰色爱心
 starForCom = {0x505052,"0|9|0x505052,0|13|0x505052,0|16|0x505052,8|16|0x505052,8|11|0x505052,8|8|0x505052,13|5|0x505052,13|14|0x505052,13|17|0x505052", 90, 558, 399, 622, 1039}
 --关注按钮
-followBtn = {0xffffff,"8|0|0xffffff,15|0|0xffffff,15|4|0xfe2c55,12|4|0xfe2c55,10|4|0xfe2c55,3|4|0xfe2c55,0|4|0xfe2c55", 90, 508, 252, 543, 270}
+followBtn = {0xffffff,"8|0|0xffffff,15|0|0xffffff,15|4|0xfe2c55,12|4|0xfe2c55,10|4|0xfe2c55,3|4|0xfe2c55,0|4|0xfe2c55", 80, 508, 252, 543, 270}
+followBtnOne = {0xfe2c55,"0|1|0xfe2c55,3|1|0xfe2c55,3|-2|0xfe2c55,-2|-2|0xfe2c55,-2|2|0xfe2c55", 85, 418, 252, 440, 271}
 --用户信息返回
 backToRecom = {0xbdbdbd,"-3|2|0xbcbcbd,-6|5|0xbcbcbc,-8|7|0xbcbcbc,-9|9|0xbcbcbc,-10|11|0xbcbcbc", 75, 18, 56, 57, 91}
 --发消息
@@ -891,19 +892,27 @@ function followDouYin()
 		if _followcts >= 78 then
 			runToast("关注完成")	
 			break
+			
 		elseif _freshcts<=4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(x,y)
 			_freshcts = _freshcts + 1
+		elseif MulcolorNoOffset_xx_model(followBtn) then
+			click(x,y)
+			_followcts = _followcts + 1
+			toast(_followcts)		
+			mSleep(1000)
+		elseif MulcolorNoOffset_xx_model(followBtnOne) then
+			click(x,y)
+			_followcts = _followcts + 1
+			toast(_followcts)	
+			mSleep(1000)
 		elseif _followcts <= 78 and _freshcts > 4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(574,624)mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(closeCom) and MulcolorNoOffset_xx_model(starForCom) then
 			click(x,y)mSleep(1000)
 			click(x-530,y)mSleep(1000)
 			_slidects = 1
-		elseif MulcolorNoOffset_xx_model(followBtn) then
-			click(x,y)
-			_followcts = _followcts + 1
-			toast(_followcts)
+
 		elseif MulcolorNoOffset_xx_model(recomIcon)==false and MulcolorNoOffset_xx_model(followBtn) == false and MulcolorNoOffset_xx_model(backToRecom) then
 			click(x,y)mSleep(2000)
 		elseif _slidects >=3 and MulcolorNoOffset_xx_model(closeCom) then
@@ -925,7 +934,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.21.01")
+runToast("抖音脚本开始运行...v05.21.02")
 while 1 do
 	loginQQ()
 	loadDouYin()
@@ -935,7 +944,6 @@ while 1 do
 	changeAirplaneMode()
 	runToast("单轮任务结束...")
 end
-
 
 
 
