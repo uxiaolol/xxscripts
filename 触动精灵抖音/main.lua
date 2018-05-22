@@ -1,11 +1,14 @@
 require "TSLib"
 local ocr = require "cloudOcr"
 local sz = require("sz")
+
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
 UINew("抖音引流脚本","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
---UILabel("作者Uxiao,QQ:234154812")
+UILabel("作者Yang,QQ:234154812")
+UILabel("选择脚本功能")
+UICombo("step","关注,私信")
 --[[UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
@@ -580,6 +583,24 @@ function changeVpnEnable()
 	end
 end
 
+--获取NZT全息备份的记录总数
+function getNZTRecordCount()
+	openURL("nzt://cmd/getrecordcount")
+	for i=1,5 do
+		runToast("等待NZT处理")
+	end
+	local ts = require("ts")
+	local plist = ts.plist
+	local plfilename = "/var/mobile/NZTResult.plist" --设置plist路径
+	local tmp2 = plist.read(plfilename)           --读取 PLIST 文件内容并返回一个 TABLE
+	--dialog(tmp2.normal, 0)  	
+	if tmp2.normal == nil then
+		return nil
+	else
+		return tonumber(tmp2.normal)
+	end
+end
+
 --NZT一键新机
 function newPhoneByNZT()
 	runToast("NZT一键新机...")
@@ -882,6 +903,10 @@ backToRecom = {0xbdbdbd,"-3|2|0xbcbcbd,-6|5|0xbcbcbc,-8|7|0xbcbcbc,-9|9|0xbcbcbc
 sendMessage = {}
 --键盘弹起
 keyBoard = {0xb9b9bd,"-1|3|0xb9b9bd,-2|6|0xb9b9bd,-2|9|0xb9b9bd,3|8|0xffffff,4|6|0xffffff,5|4|0xffffff,6|2|0xffffff", 90, 577, 564, 601, 589}
+--男性
+maleIcon = {0xa2a0a0,"4|0|0xa3a1a2,4|3|0xa3a0a2,-2|5|0xa3a0a1,-5|3|0xa3a0a1,0|10|0xa2a0a1", 75, 33, 581, 60, 614}
+--女性
+femaleIcon = {0xadb0b2,"0|3|0xadb1b3,2|2|0xadb1b3,3|-3|0xadb1b3,3|-6|0xaeb1b3,3|-7|0xaeb1b3,7|0|0xaeb1b3,11|0|0xaeb1b3", 75, 31, 589, 56, 612}
 --抖音关注
 function followDouYin()
 	runToast("抖音关注")
@@ -896,25 +921,29 @@ function followDouYin()
 		elseif _freshcts<=4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(x,y)
 			_freshcts = _freshcts + 1
-		elseif MulcolorNoOffset_xx_model(followBtn) then
+		elseif MulcolorNoOffset_xx_model(maleIcon) and MulcolorNoOffset_xx_model(followBtn) then
 			click(x,y)
 			_followcts = _followcts + 1
-			toast(_followcts)		
-			mSleep(1000)
-		elseif MulcolorNoOffset_xx_model(followBtnOne) then
+			--[[toast("男粉".._followcts)		
+			mSleep(1000)--]]
+		elseif MulcolorNoOffset_xx_model(maleIcon) and MulcolorNoOffset_xx_model(followBtnOne) then
 			click(x,y)
 			_followcts = _followcts + 1
-			toast(_followcts)	
-			mSleep(1000)
+			--[[toast("男粉".._followcts)		
+			mSleep(1000)--]]
+		elseif MulcolorNoOffset_xx_model(maleIcon) ==false  and (MulcolorNoOffset_xx_model(followBtn) or MulcolorNoOffset_xx_model(followBtnOne)) then
+			click(38,84)--[[mSleep(1000)
+			toast("未知性别")--]]
 		elseif _followcts <= 78 and _freshcts > 4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(574,624)mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(closeCom) and MulcolorNoOffset_xx_model(starForCom) then
-			click(x,y)mSleep(1000)
-			click(x-530,y)mSleep(1000)
+			click(x,y)
+			click(x-530,y)
 			_slidects = 1
 
 		elseif MulcolorNoOffset_xx_model(recomIcon)==false and MulcolorNoOffset_xx_model(followBtn) == false and MulcolorNoOffset_xx_model(backToRecom) then
-			click(x,y)mSleep(2000)
+			click(x,y)
+			--mSleep(2000)
 		elseif _slidects >=3 and MulcolorNoOffset_xx_model(closeCom) then
 			click(x,y)
 			_freshcts = 1
@@ -934,17 +963,24 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.21.02")
-while 1 do
-	loginQQ()
-	loadDouYin()
-	followDouYin()
-	modifyIndex()
-	newPhoneByNZT()
-	changeAirplaneMode()
-	runToast("单轮任务结束...")
-end
+runToast("抖音脚本开始运行...v05.22.01")
+if step == "关注" then
+	runToast("您选择了关注功能")
+	while 1 do
+		loginQQ()
+		loadDouYin()
+		followDouYin()
+		modifyIndex()
+		newPhoneByNZT()
+		changeAirplaneMode()
+		runToast("单轮任务结束...")
+	end
+elseif step == "私信" then
+	runToast("您选择了私信功能")
+	local ret = getNZTRecordCount()
+	runToast(ret)
 
+end
 
 
 
