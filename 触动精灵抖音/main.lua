@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.23.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.23.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 UILabel("作者Yang,QQ:234154812")
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -881,7 +881,7 @@ sliderToMore = {0x2d2f39,"0|3|0x2d2f39,0|6|0x2d2f39,0|8|0x2d2f39,3|8|0x2d1a28,3|
 --继续播放
 continueToPlay = {0x292b37,"0|4|0x292b37,0|8|0x292b37,-1|8|0x5a5c69,-1|4|0x5a5c69,-2|4|0xd9dbeb,-2|1|0xd8daea,-2|7|0xcfd1e0", 85, 396, 723, 408, 741}
 --抖音底部中间的加号
-moreInfo ={0x17eee8,"0|4|0x17eee8,0|7|0x17eee8,0|10|0x17eee8,3|10|0xffffff,3|7|0xffffff,3|3|0xffffff,3|2|0xffffff", 85, 271, 1064, 290, 1115}
+moreInfo ={0x17eee8,"0|4|0x17eee8,0|7|0x17eee8,0|10|0x17eee8,3|10|0xffffff,3|7|0xffffff,3|3|0xffffff,3|2|0xffffff", 80, 271, 1064, 290, 1115}
 --通过qq登录
 loadByQQ = {0x000000,"0|1|0x000000,3|1|0x000000,7|1|0x000000,8|1|0x000000,8|-5|0xffffff,5|-5|0xffffff,1|-5|0xffffff", 85, 239, 684, 270, 702}
 loadByQQOne = {0xface15,"3|0|0xface15,7|0|0xface15,11|0|0xface15,11|5|0xface15,7|5|0xface15,4|5|0xface15,2|5|0xface15", 85, 232, 645, 256, 659}
@@ -1013,7 +1013,8 @@ cancelBtn = {0x292b37,"0|3|0x292b37,0|7|0x292b37,0|8|0x292b37,-4|8|0xd9dbeb,-4|5
 --允许访问位置
 rejectLocation = {0x292b37,"0|5|0x292b37,0|8|0x292b37,5|8|0xd9dbeb,5|6|0xd9dbeb,5|4|0xd9dbeb,7|4|0xd9dbeb", 85, 470, 705, 492, 726}
 --我
-meIcon = {0xffffff,"0|4|0xffffff,0|7|0xffffff,3|7|0x1c1c1e,6|7|0x1c1c1e,7|7|0x1c1c1e,7|1|0x151516,5|1|0x151516", 85, 563, 1069, 582, 1089}
+meIcon = {0xffffff,"0|4|0xffffff,0|7|0xffffff,3|7|0x1c1c1e,6|7|0x1c1c1e,7|7|0x1c1c1e,7|1|0x151516,5|1|0x151516", 80, 563, 1069, 582, 1089}
+myDouyinID = {0xffffff,"5|0|0xffffff,12|2|0xffffff,12|7|0xffffff,5|8|0xffffff,2|8|0xffffff,-1|8|0xffffff,-1|5|0xffffff", 90, 54, 490, 76, 507}
 --我的粉丝
 myFunsIcon = {0xffffff,"0|4|0xffffff,0|9|0xffffff,0|13|0xffffff,5|13|0x0e0f1a,5|11|0x0e0f1a,5|4|0x0e0f1a,5|2|0x0e0f1a", 85, 280, 69, 298, 99}
 --第一个互相关注
@@ -1046,8 +1047,8 @@ function pm()
 	local _index = 1
 	local _move = 1
 	while 1 do
-		if MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(meIcon) then
-			click(337,680)
+		if MulcolorNoOffset_xx_model(moreInfo) and (MulcolorNoOffset_xx_model(meIcon) or MulcolorNoOffset_xx_model(myDouyinID))then
+			click(343,680)mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(moreInfo) then
 			click(573,1085)
 			mSleep(1000)
@@ -1128,8 +1129,8 @@ function pm()
 			click(35,83)
 			_index = _index + 1
 		elseif _index == 7 and MulcolorNoOffset_xx_model(myFunsIcon) then
-			clickMove(465,379,463,160,1)mSleep(1000)
-			_index=5
+			clickMove(288,976,317,285,10)mSleep(1000)
+			_index=1
 			_move=_move + 1
 		end		
 		myIsFrontApp("com.ss.iphone.ugc.Aweme")
