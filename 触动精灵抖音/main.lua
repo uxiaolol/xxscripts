@@ -9,6 +9,8 @@ UINew("抖音引流脚本","运行脚本","退出脚本","uiconfig.dat",0,120,w*
 UILabel("作者Yang,QQ:234154812")
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
+UILabel("是否删除还原计数")
+UICombo("del","no,yes")
 --[[UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
@@ -739,6 +741,18 @@ function getIndex()
     end
 end
 
+function getRecord()
+    -- body
+    local _file
+    local ret
+    _file = io.open("/User/Media/TouchSprite/lua/a.txt","r")
+    if _file ~= nil then
+        ret = tonumber(_file:read())
+        _file:close()
+        return ret
+    end	
+end
+
 --修改index的值
 function modifyIndex()
 	local _index = readFile("/User/Media/TouchSprite/lua/index.txt")
@@ -750,6 +764,36 @@ function modifyIndex()
 		file:write(ret+1)
 		file:close()
 	end
+end
+
+    --检测指定文件是否存在
+function file_exists(file_name)
+    local f = io.open(file_name, "r")
+    return f ~= nil and f:close()
+end
+
+--生成还原记录
+function record()
+	local _file = nil
+	--_file = io.open("/User/Media/TouchSprite/lua/a.txt","r")
+	if file_exists("/User/Media/TouchSprite/lua/a.txt") then
+		local _index = readFile("/User/Media/TouchSprite/lua/a.txt")
+		local ret =string.match(_index[1],"%s*(.-)%s*$")
+		ret = string.match(ret,"%d+")
+		local file = nil
+		file = io.open("/User/Media/TouchSprite/lua/a.txt","w")
+		if file then
+			file:write(ret+1)
+			file:close()
+		end		
+	else
+		_file = io.open("/User/Media/TouchSprite/lua/a.txt","w")
+		if _file then
+			_file:write(1)	
+			_file:close()
+		end
+	end
+	
 end
 
 --新用户按钮
@@ -913,6 +957,7 @@ function followDouYin()
 	local _freshcts = 1
 	local _followcts = 1
 	local _slidects = 1
+	
 	while 1 do
 		if _followcts >= 78 then
 			runToast("关注完成")	
@@ -958,6 +1003,101 @@ function followDouYin()
 	end
 end
 
+
+--发现通讯录好友
+cancelBtn = {0x292b37,"0|3|0x292b37,0|7|0x292b37,0|8|0x292b37,-4|8|0xd9dbeb,-4|5|0xd9dbeb,-4|3|0xd9dbeb,-6|3|0xd9dbeb", 85, 471, 682, 490, 704}
+--允许访问位置
+rejectLocation = {0x292b37,"0|5|0x292b37,0|8|0x292b37,5|8|0xd9dbeb,5|6|0xd9dbeb,5|4|0xd9dbeb,7|4|0xd9dbeb", 85, 470, 705, 492, 726}
+--我
+meIcon = {0xffffff,"0|4|0xffffff,0|7|0xffffff,3|7|0x1c1c1e,6|7|0x1c1c1e,7|7|0x1c1c1e,7|1|0x151516,5|1|0x151516", 85, 563, 1069, 582, 1089}
+--我的粉丝
+myFunsIcon = {0xffffff,"0|4|0xffffff,0|9|0xffffff,0|13|0xffffff,5|13|0x0e0f1a,5|11|0x0e0f1a,5|4|0x0e0f1a,5|2|0x0e0f1a", 85, 280, 69, 298, 99}
+--第一个互相关注
+focusOne = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 513, 194, 546, 237}
+--第二个互相关注
+focusTwo = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 524, 376, 545, 410}
+--第三个互相关注
+focusThree = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 521, 553, 547, 582}
+--第四个互相关注
+focusFour = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 523, 726, 545, 761}
+--第五个互相关注
+foucsFive = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 523, 903, 545, 936}
+--第六个互相关注
+focusSix = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 526, 1080, 546, 1112}
+--发消息
+sendMessageBtn = {}
+--粉丝作品
+funsWork = {0xffffff,"3|0|0xffffff,7|0|0xffffff,7|4|0x161823,4|4|0x161823,1|4|0x161823,1|8|0xffffff,5|8|0xffffff", 90, 139, 744, 164, 760}
+--键盘发送按钮
+keyboardSendBtn = {0xfeffff,"10|0|0xfeffff,10|4|0x007aff,8|4|0x007aff,1|4|0x007aff,0|4|0x007aff,5|4|0xffffff", 90, 565, 1076, 594, 1094}
+--已经私聊过
+finishedSend = {0xeba825,"0|4|0xeba825,0|7|0xeba825,0|10|0xeba825,0|13|0xeba825,0|16|0xeba825,0|19|0xeba825,0|23|0xeba825", 90, 491, 195, 539, 407}
+--暂时没有更多了
+noMoreNow = {0x0e0f1a,"3|0|0x0e0f1a,7|0|0x0e0f1a,7|3|0x0e0f1a,4|3|0x0e0f1a,2|3|0x0e0f1a,0|3|0x0e0f1a,-1|3|0x0e0f1a", 90, 277, 1105, 312, 1130}
+--私信粉丝
+function pm()
+	runToast("私信粉丝")
+	appKillAndRun("com.ss.iphone.ugc.Aweme")
+	local _index = 1
+	local _move = 1
+	while 1 do
+		if MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(meIcon) then
+			click(337,680)
+		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(moreInfo) then
+			click(573,1085)
+			mSleep(1000)
+		elseif _move >3 and MulcolorNoOffset_xx_model(myFunsIcon) then
+			runToast("私信完成")	
+			return 
+		elseif _move >1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
+			runToast("私信完成")
+			return
+		elseif _index==6 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusSix) --]]then
+			click(389,1077)	mSleep(1000)		
+		elseif _index==5 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(foucsFive)--]] then
+			click(401,921) mSleep(1000)		
+		elseif _index==4 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusFour)--]] then
+			click(408,729) mSleep(1000)		
+		elseif _index==3 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusThree)--]] then
+			click(413,567) mSleep(1000)					 
+		elseif _index==2 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusTwo)--]] then
+			click(422,384)	mSleep(1000)				
+		elseif _index==1 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusOne)--]] then
+			click(435,211)	mSleep(1000)		
+		elseif MulcolorNoOffset_xx_model(continueToPlay) then
+			click(x,y)mSleep(1000)			
+		elseif MulcolorNoOffset_xx_model(cancelBtn) then
+			click(195,709)
+		elseif MulcolorNoOffset_xx_model(rejectLocation) then
+			click(177,718)
+		elseif MulcolorNoOffset_xx_model(sliderToMore) then
+			click(319,1084)	
+			mSleep(1000)		
+		elseif MulcolorNoOffset_xx_model(followBtn) or MulcolorNoOffset_xx_model(followBtnOne) then
+			click(37,81)
+		elseif MulcolorNoOffset_xx_model(funsWork) then
+			click(431,263)
+		elseif MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
+			click(35,83)mSleep(1500)
+			click(35,83)
+			_index = _index + 1
+		elseif MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
+			inputText("谢谢关注,加个微信聊聊天")mSleep(500)
+			click(556,1088)
+			inputText("15586847584")mSleep(500)
+			click(556,1088)mSleep(500)
+			click(35,83)mSleep(1500)
+			click(35,83)
+			_index = _index + 1
+		elseif _index == 7 and MulcolorNoOffset_xx_model(myFunsIcon) then
+			clickMove(465,379,463,203,1)mSleep(1000)
+			_index=5
+			_move=_move + 1
+		end		
+		myIsFrontApp("com.ss.iphone.ugc.Aweme")
+	end
+end
+
 function allSteps()
 	
 end
@@ -977,9 +1117,20 @@ if step == "关注" then
 	end
 elseif step == "私信" then
 	runToast("您选择了私信功能")
-	local ret = getNZTRecordCount()
-	runToast(ret)
-
+	if del == "yes" then
+		os.execute("rm -rf  /User/Media/TouchSprite/lua/a.txt")
+	end
+	while 1 do	
+		pm()
+		nextRecordNZT()
+		record()
+		local cur = getRecord()
+		local total = getNZTRecordCount()
+		if cur > total then
+			dialog("所有记录运行完毕",0)
+			lua_exit();   
+		end
+	end	
 end
 
 
