@@ -11,6 +11,10 @@ UILabel("选择脚本功能")
 UICombo("step","关注,私信")
 UILabel("是否删除还原计数")
 UICombo("del","no,yes")
+UILabel("私聊内容")
+UIEdit("contents","个性签名","",15,"left","255,0,0")
+UILabel("微信号码")
+UIEdit("wxid","微信号码","",15,"left","255,0,0")
 --[[UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
@@ -948,9 +952,9 @@ sendMessage = {}
 --键盘弹起
 keyBoard = {0xb9b9bd,"-1|3|0xb9b9bd,-2|6|0xb9b9bd,-2|9|0xb9b9bd,3|8|0xffffff,4|6|0xffffff,5|4|0xffffff,6|2|0xffffff", 90, 577, 564, 601, 589}
 --男性
-maleIcon = {0xa2a0a0,"4|0|0xa3a1a2,4|3|0xa3a0a2,-2|5|0xa3a0a1,-5|3|0xa3a0a1,0|10|0xa2a0a1", 75, 33, 581, 60, 614}
+maleIcon = {0xa2a0a0,"4|0|0xa3a1a2,4|3|0xa3a0a2,-2|5|0xa3a0a1,-5|3|0xa3a0a1,0|10|0xa2a0a1", 85, 33, 581, 60, 614}
 --女性
-femaleIcon = {0xadb0b2,"0|3|0xadb1b3,2|2|0xadb1b3,3|-3|0xadb1b3,3|-6|0xaeb1b3,3|-7|0xaeb1b3,7|0|0xaeb1b3,11|0|0xaeb1b3", 75, 31, 589, 56, 612}
+femaleIcon = {0xadb0b2,"0|3|0xadb1b3,2|2|0xadb1b3,3|-3|0xadb1b3,3|-6|0xaeb1b3,3|-7|0xaeb1b3,7|0|0xaeb1b3,11|0|0xaeb1b3", 85, 31, 589, 56, 612}
 --抖音关注
 function followDouYin()
 	runToast("抖音关注")
@@ -1026,14 +1030,15 @@ foucsFive = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0
 focusSix = {0xb0b0b4,"4|0|0xb0b0b4,6|0|0xb0b0b4,4|3|0x393a44,1|3|0x393a44,1|4|0x393a44,4|4|0x393a44", 85, 526, 1080, 546, 1112}
 --发消息
 sendMessageBtn = {}
---粉丝作品
-funsWork = {0xffffff,"3|0|0xffffff,7|0|0xffffff,7|4|0x161823,4|4|0x161823,1|4|0x161823,1|8|0xffffff,5|8|0xffffff", 90, 139, 744, 164, 760}
+--抖音号
+douyinID = {0xffffff,"4|0|0xffffff,8|0|0xffffff,11|0|0xffffff,12|3|0xffffff,12|5|0xffffff,12|8|0xffffff,9|8|0xffffff,6|8|0xffffff,4|8|0xffffff", 90, 54, 473, 76, 490}
+funsWorkOne = {0xa2a3a7,"4|0|0xa2a3a7,6|0|0xa2a3a7,6|3|0x161823,6|5|0x161823,4|5|0x161823,2|5|0x161823,1|5|0x161823", 80, 141, 743, 164, 760}
 --键盘发送按钮
 keyboardSendBtn = {0xfeffff,"10|0|0xfeffff,10|4|0x007aff,8|4|0x007aff,1|4|0x007aff,0|4|0x007aff,5|4|0xffffff", 90, 565, 1076, 594, 1094}
 --已经私聊过
 finishedSend = {0xeba825,"0|4|0xeba825,0|7|0xeba825,0|10|0xeba825,0|13|0xeba825,0|16|0xeba825,0|19|0xeba825,0|23|0xeba825", 90, 491, 195, 539, 407}
 --暂时没有更多了
-noMoreNow = {0x0e0f1a,"3|0|0x0e0f1a,7|0|0x0e0f1a,7|3|0x0e0f1a,4|3|0x0e0f1a,2|3|0x0e0f1a,0|3|0x0e0f1a,-1|3|0x0e0f1a", 90, 277, 1105, 312, 1130}
+noMoreNow ={0x0e0f1a,"0|2|0x0e0f1a,0|4|0x0e0f1a,2|4|0x0e0f1a,2|2|0x0e0f1a,2|0|0x0e0f1a,4|0|0x0e0f1a,4|-2|0x0e0f1a", 90, 204, 1114, 217, 1129}
 --私信粉丝
 function pm()
 	runToast("私信粉丝")
@@ -1046,24 +1051,51 @@ function pm()
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(moreInfo) then
 			click(573,1085)
 			mSleep(1000)
-		elseif _move >3 and MulcolorNoOffset_xx_model(myFunsIcon) then
+		--[[elseif _move >3 and MulcolorNoOffset_xx_model(myFunsIcon) then
 			runToast("私信完成")	
-			return 
-		elseif _move >1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
+			return --]]
+		--[[elseif _move >1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
 			runToast("私信完成")
-			return
+			return--]]
 		elseif _index==6 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusSix) --]]then
 			click(389,1077)	mSleep(1000)		
+			if getColor(389,1077) == 0x0e0f1a then 
+				runToast("第6个坐标没有有粉丝...私信完成") 
+				return
+			end
 		elseif _index==5 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(foucsFive)--]] then
 			click(401,921) mSleep(1000)		
+			if getColor(401,921) == 0x0e0f1a then 
+				runToast("第5个坐标没有有粉丝...私信完成")
+				return 
+			end
 		elseif _index==4 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusFour)--]] then
 			click(408,729) mSleep(1000)		
+			if getColor(408,729) == 0x0e0f1a then 
+				runToast("第4个坐标没有有粉丝...私信完成")
+				return 
+			end
 		elseif _index==3 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusThree)--]] then
-			click(413,567) mSleep(1000)					 
+			click(413,567) mSleep(1000)		
+			if getColor(413,567) == 0x0e0f1a then 
+				runToast("第3个坐标没有有粉丝...私信完成")			 
+				return
+			end
 		elseif _index==2 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusTwo)--]] then
-			click(422,384)	mSleep(1000)				
+			click(422,384)	mSleep(1000)		
+			if getColor(422,384) == 0x0e0f1a then 
+				runToast("第2个坐标没有有粉丝...私信完成")		
+				return
+			end
 		elseif _index==1 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusOne)--]] then
 			click(435,211)	mSleep(1000)		
+			if getColor(435,211) == 0x0e0f1a then 
+				runToast("第1个坐标没有有粉丝...私信完成")
+				return
+			end
+		--[[elseif _move >=1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
+			runToast("私信完成")
+			return	--]]		
 		elseif MulcolorNoOffset_xx_model(continueToPlay) then
 			click(x,y)mSleep(1000)			
 		elseif MulcolorNoOffset_xx_model(cancelBtn) then
@@ -1075,16 +1107,16 @@ function pm()
 			mSleep(1000)		
 		elseif MulcolorNoOffset_xx_model(followBtn) or MulcolorNoOffset_xx_model(followBtnOne) then
 			click(37,81)
-		elseif MulcolorNoOffset_xx_model(funsWork) then
+		elseif MulcolorNoOffset_xx_model(douyinID) then
 			click(431,263)
 		elseif MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
 		elseif MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
-			inputText("谢谢关注,加个微信聊聊天")mSleep(500)
+			inputText(contents)mSleep(500)
 			click(556,1088)
-			inputText("15586847584")mSleep(500)
+			inputText(wxid)mSleep(500)
 			click(556,1088)mSleep(500)
 			click(35,83)mSleep(1500)
 			click(35,83)
