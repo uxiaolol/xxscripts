@@ -10,7 +10,7 @@ UINew("抖音05.23.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
 UILabel("输入刷新次数")
-UIEdit("freshcts","5","",15,"left","255,0,0")
+UIEdit("freshcts","输入刷新次数","",15,"left","255,0,0")
 UILabel("选择聊天对象")
 UICombo("chat","已聊,未聊")
 UILabel("是否删除还原计数")
@@ -988,7 +988,7 @@ function followDouYin()
 		elseif MulcolorNoOffset_xx_model(maleIcon) ==false  and (MulcolorNoOffset_xx_model(followBtn) or MulcolorNoOffset_xx_model(followBtnOne)) then
 			click(38,84)--[[mSleep(1000)
 			toast("未知性别")--]]
-		elseif _followcts <= 78 and _freshcts > 4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
+		elseif _followcts <= 78 and _freshcts > tonumber(freshcts) and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(574,624)mSleep(2000)
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(closeCom) and MulcolorNoOffset_xx_model(starForCom) then
 			click(x,y)
