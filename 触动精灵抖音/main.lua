@@ -9,12 +9,17 @@ UINew("抖音05.23.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,
 UILabel("作者Yang,QQ:234154812")
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
+UILabel("输入刷新次数")
+UIEdit("freshcts","5","",15,"left","255,0,0")
+UILabel("选择聊天对象")
+UICombo("chat","已聊,未聊")
 UILabel("是否删除还原计数")
 UICombo("del","no,yes")
 UILabel("私聊内容")
 UIEdit("contents","个性签名","",15,"left","255,0,0")
 UILabel("微信号码")
 UIEdit("wxid","微信号码","",15,"left","255,0,0")
+
 --[[UILabel("易码账号")
 UIEdit("yimaAccount","易码账号","",15,"left","255,0,0")
 UILabel("易码密码")
@@ -967,7 +972,7 @@ function followDouYin()
 			runToast("关注完成")	
 			break
 			
-		elseif _freshcts<=4 and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
+		elseif _freshcts<=(tonumber(freshcts)) and MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(homePage) then
 			click(x,y)
 			_freshcts = _freshcts + 1
 		elseif MulcolorNoOffset_xx_model(maleIcon) and MulcolorNoOffset_xx_model(followBtn) then
@@ -1116,15 +1121,27 @@ function pm()
 			click(37,81)
 		elseif MulcolorNoOffset_xx_model(douyinID) then
 			click(431,263)
-		elseif MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
+		elseif chat == "未聊" and MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
-		elseif MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
+		elseif chat == "未聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
 			inputText(contents)mSleep(500)
 			click(556,1088)
 			inputText(wxid)mSleep(500)
 			click(556,1088)mSleep(500)
+			click(35,83)mSleep(1500)
+			click(35,83)
+			_index = _index + 1
+		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend) and MulcolorNoOffset_xx_model(keyboardSendBtn) then
+			inputText(contents)mSleep(500)
+			click(556,1088)
+			inputText(wxid)mSleep(500)
+			click(556,1088)mSleep(500)
+			click(35,83)mSleep(1500)
+			click(35,83)
+			_index = _index + 1
+		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
@@ -1142,7 +1159,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.23.01")
+runToast("抖音脚本开始运行...v05.24.01")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
