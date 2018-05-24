@@ -6,7 +6,7 @@ local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
 UINew("抖音05.23.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
-UILabel("作者Yang,QQ:234154812")
+
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
 UILabel("输入刷新次数")
