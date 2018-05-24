@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.23.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.24.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -716,38 +716,30 @@ end
 
 --获取文本账号
 function getQQ()
-	-- string.match(account[1],"%s*(.-)%s*$")
-	local _index = readFile("/User/Media/TouchSprite/lua/index.txt")
-	local ret =string.match(_index[1],"%s*(.-)%s*$")
-	ret = string.match(ret,"%d+")
-	
-	local aa = tonumber(ret)
-	
-	local _qq = readFile("/User/Media/TouchSprite/lua/qq.txt")
-	
+	local _qq = readFile("/User/Media/TouchSprite/lua/qq.txt")		
 	local relt = nil
-	if _qq[aa] == nil then
+	if _qq[1] == nil then
 		while 1 do
 			runToast("全部QQ登录完成")
 		end
 	end
-	relt = string.match(_qq[aa],"%s*(.-)%s*$")
-	
-	myToast(relt)
+	relt = string.match(_qq[1],"%s*(.-)%s*$")
+	--myToast(relt)
 	return relt
-	--return _ret
+	
 end
 
-function getIndex()
+function removeAccount()
     -- body
-    local _file
-    local ret
-    _file = io.open("/User/Media/TouchSprite/lua/index.txt","r")
-    if _file ~= nil then
-        ret = tonumber(_file:read())
-        _file:close()
-        return ret
-    end
+    local ret = readFile("/User/Media/TouchSprite/lua/qq.txt")		
+	os.execute("rm -rf /User/Media/TouchSprite/lua/qq.txt")	
+	local _file = io.open("/User/Media/TouchSprite/lua/qq.txt","a+")
+	if _file then
+		for i=1,#ret-1 do
+			_file:write(ret[i+1].."\n")
+		end
+		_file:close()
+	end
 end
 
 function getRecord()
@@ -831,6 +823,7 @@ function loginQQ()
 	--appKillAndRun("com.tencent.mqq")
 	local _acc,_pwd = false ,false
 	local acc,pwd = nil,nil
+	local _input = false
 	while 1 do
 		if MulcolorNoOffset_xx_model(qqNewUser) then
 			click(168,979)
@@ -862,6 +855,7 @@ function loginQQ()
 			if ret ~= false then
 				local x1 = Split(ret,",")
 				clickMoveQQ(135,614,x1[1]+30,614,5)mSleep(5000)
+				_input = true
 			end
 		elseif MulcolorNoOffset_xx_model(loadFailed) then
 			click(x,y)
@@ -875,6 +869,10 @@ function loginQQ()
 			click(x,y)
 		elseif MulcolorNoOffset_xx_model(qqMessage) then
 			runToast("qq登录完成")
+			if _input then
+				--移除文本第一条
+				removeAccount()
+			end
 			break
 		end
 		appRun("com.tencent.mqq")
@@ -1166,7 +1164,7 @@ if step == "关注" then
 		loginQQ()
 		loadDouYin()
 		followDouYin()
-		modifyIndex()
+		
 		newPhoneByNZT()
 		changeAirplaneMode()
 		runToast("单轮任务结束...")
