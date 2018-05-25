@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.24.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.25.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -817,6 +817,8 @@ qqMessage = {0x36b0fe,"4|0|0x36b0fe,7|0|0x36b1fe,7|3|0xffffff,1|3|0xffffff,1|6|0
 closeBinding = {0x000000,"0|4|0xffffff,0|6|0xffffff,0|9|0x000000,-5|9|0x000000,-5|4|0xffffff,-5|0|0x000000", 85, 13, 71, 36, 89}
 --确定关闭绑定
 closeBindingSure = {0x000000,"5|0|0x000000,5|4|0xffffff,5|6|0xffffff,1|6|0xffffff,-2|6|0xffffff,-2|8|0x4a4a4a,1|8|0x4a4a4a", 85, 428, 707, 452, 724}
+--账号暂时无法登陆
+frozenQQ = {0x000000,"11|0|0x000000,11|2|0xffffff,3|2|0xffffff,3|4|0x858585,8|4|0x858585,8|5|0x000000,3|5|0x000000", 90, 240, 356, 274, 369}
 --登录QQ
 function loginQQ()
 	runToast("qq登录")
@@ -824,6 +826,7 @@ function loginQQ()
 	local _acc,_pwd = false ,false
 	local acc,pwd = nil,nil
 	local _input = false
+	local count = 1
 	while 1 do
 		if MulcolorNoOffset_xx_model(qqNewUser) then
 			click(168,979)
@@ -857,10 +860,16 @@ function loginQQ()
 				clickMoveQQ(135,614,x1[1]+30,614,5)mSleep(5000)
 				_input = true
 			end
+		elseif count >=3 and MulcolorNoOffset_xx_model(loadFailed) then
+			runToast("账号密码连续错误三次换号...")
+			appKill("com.tencent.mqq")
+			_acc,_pwd = false ,false
+			runToast("qq冻结")
 		elseif MulcolorNoOffset_xx_model(loadFailed) then
 			click(x,y)
 			_acc,_pwd = false ,false
 			mSleep(5000)
+			count = count + 1
 		elseif MulcolorNoOffset_xx_model(setNowBtn) then
 			click(321,860)
 		elseif MulcolorNoOffset_xx_model(closeBindingSure) then
@@ -874,6 +883,10 @@ function loginQQ()
 				removeAccount()
 			end
 			break
+		elseif MulcolorNoOffset_xx_model(frozenQQ) then
+			appKill("com.tencent.mqq")
+			_acc,_pwd = false ,false
+			runToast("qq冻结")
 		end
 		appRun("com.tencent.mqq")
 	end
@@ -958,6 +971,7 @@ keyBoard = {0xb9b9bd,"-1|3|0xb9b9bd,-2|6|0xb9b9bd,-2|9|0xb9b9bd,3|8|0xffffff,4|6
 maleIcon = {0xa2a0a0,"4|0|0xa3a1a2,4|3|0xa3a0a2,-2|5|0xa3a0a1,-5|3|0xa3a0a1,0|10|0xa2a0a1", 85, 33, 581, 60, 614}
 --女性
 femaleIcon = {0xadb0b2,"0|3|0xadb1b3,2|2|0xadb1b3,3|-3|0xadb1b3,3|-6|0xaeb1b3,3|-7|0xaeb1b3,7|0|0xaeb1b3,11|0|0xaeb1b3", 85, 31, 589, 56, 612}
+--弹出举报界面
 --抖音关注
 function followDouYin()
 	runToast("抖音关注")
@@ -992,7 +1006,7 @@ function followDouYin()
 			click(x,y)
 			click(x-530,y)
 			_slidects = 1
-
+			mSleep(500)
 		elseif MulcolorNoOffset_xx_model(recomIcon)==false and MulcolorNoOffset_xx_model(followBtn) == false and MulcolorNoOffset_xx_model(backToRecom) then
 			click(x,y)
 			--mSleep(2000)
@@ -1005,6 +1019,7 @@ function followDouYin()
 			_slidects = _slidects + 1
 		elseif MulcolorNoOffset_xx_model(keyBoard) then
 			click(x,y-70)
+		--	
 		end
 		myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
@@ -1157,7 +1172,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.24.01")
+runToast("抖音脚本开始运行...v05.25.02")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
@@ -1186,6 +1201,7 @@ elseif step == "私信" then
 		end
 	end	
 end
+
 
 
 
