@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.25.02","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.25.04","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -579,6 +579,18 @@ function changeAirplaneMode()
 	mSleep(2000)
 end
 
+function encodeURI(s)
+    s = string.gsub(s, "([^%w%.%- ])", function(c) return string.format("%%%02X", string.byte(c)) end)
+    return string.gsub(s, " ", "+")
+end
+
+--重命名当前记录
+function renameRecord(pama)
+	recordId = encodeURI(pama);
+	url = string.format("nzt://cmd/renamecurrentrecord?%s", pama);
+	openURL(url);
+end
+
 --关闭打开vpn
 function changeVpnEnable()
 	runToast("关闭打开VPN...")
@@ -819,6 +831,7 @@ closeBinding = {0x000000,"0|4|0xffffff,0|6|0xffffff,0|9|0x000000,-5|9|0x000000,-
 closeBindingSure = {0x000000,"5|0|0x000000,5|4|0xffffff,5|6|0xffffff,1|6|0xffffff,-2|6|0xffffff,-2|8|0x4a4a4a,1|8|0x4a4a4a", 85, 428, 707, 452, 724}
 --账号暂时无法登陆
 frozenQQ = {0x000000,"11|0|0x000000,11|2|0xffffff,3|2|0xffffff,3|4|0x858585,8|4|0x858585,8|5|0x000000,3|5|0x000000", 90, 240, 356, 274, 369}
+frozen5s = {0x000000,"0|5|0x000000,0|13|0x000000,3|13|0xffffff,5|13|0xffffff,5|4|0xffffff,5|0|0xffffff,5|-2|0x0a0a0a", 90, 278, 336, 297, 374}
 --登录QQ
 function loginQQ()
 	runToast("qq登录")
@@ -883,10 +896,11 @@ function loginQQ()
 				removeAccount()
 			end
 			break
-		elseif MulcolorNoOffset_xx_model(frozenQQ) then
+		elseif MulcolorNoOffset_xx_model(frozenQQ) or MulcolorNoOffset_xx_model(frozen5s) then
 			appKill("com.tencent.mqq")
 			_acc,_pwd = false ,false
 			runToast("qq冻结")
+			removeAccount()
 		end
 		appRun("com.tencent.mqq")
 	end
@@ -911,6 +925,10 @@ loadFailedSure = {0x000000,"2|5|0xffffff,2|10|0xffffff,5|10|0x000000,5|4|0x00000
 reAllow = {0x00aced,"0|-3|0x00aced,4|-3|0x00aced,5|-1|0x00aced,5|2|0x00aced", 85, 17, 887, 70, 921}
 --点快了跳转到手机登录同意抖音用户协议
 agreementIcon = {0xface15,"3|0|0xface15,8|0|0xface15,8|5|0xface15,3|5|0xface15,0|5|0xface15,0|9|0xface15,4|9|0xface15", 90, 359, 617, 386, 638}
+--申述
+complaintBtn = {0x007aff,"3|0|0x007aff,8|0|0x007aff,15|0|0x007aff,19|4|0x007aff,19|7|0x007aff,15|7|0x007aff,12|7|0x007aff", 90, 419, 613, 454, 630}
+--小黑屋
+bannedIcon = {0xa6a6a8,"7|0|0xa6a6a8,12|0|0xa6a6a8,12|4|0x05060a,9|4|0x05060a,7|4|0x06060a,1|4|0x05060a,1|8|0x9d9d9f,8|8|0x9d9d9f", 90, 473, 537, 502, 555}
 --抖音登录
 function loadDouYin()
 	runToast("抖音登录")
@@ -920,6 +938,11 @@ function loadDouYin()
 		if user and MulcolorNoOffset_xx_model(moreInfo) then
 			runToast("抖音登录完成")
 			return true
+		--关小黑屋	
+		elseif MulcolorNoOffset_xx_model(moreInfo) and MulcolorNoOffset_xx_model(bannedIcon) then
+			runToast("被关小黑屋")
+			removeAccount()
+			return false
 		elseif MulcolorNoOffset_xx_model(continueToPlay) then
 			click(x,y)mSleep(1000)
 		elseif user==false and MulcolorNoOffset_xx_model(moreInfo) then
@@ -945,6 +968,12 @@ function loadDouYin()
 			mSleep(1000)
 		elseif MulcolorNoOffset_xx_model(agreementIcon) then
 			click(569,71)mSleep(1000)
+		--账号需要申述
+		elseif MulcolorNoOffset_xx_model(complaintBtn) then
+			--nzt一键新机/删除当前记录/删除当前QQ号
+			runToast("账号需要申述")
+			removeAccount()
+			return false
 		end
 		--myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
@@ -1172,16 +1201,23 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.25.02")
+runToast("抖音脚本开始运行...v05.25.04")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
 		loginQQ()
-		loadDouYin()
-		followDouYin()
-		
-		newPhoneByNZT()
-		changeAirplaneMode()
+		if loadDouYin() then
+			followDouYin()
+			newPhoneByNZT()
+			changeAirplaneMode()
+		else
+			renameRecord("ban")
+			mSleep(5000)
+			newPhoneByNZT()
+			changeAirplaneMode()			
+			openURL("nzt://cmd/deleterecord?ban")
+			mSleep(5000)
+		end
 		runToast("单轮任务结束...")
 	end
 elseif step == "私信" then
