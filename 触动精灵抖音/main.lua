@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.25.04","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.26.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -1096,9 +1096,11 @@ function pm()
 	while 1 do
 		if MulcolorNoOffset_xx_model(moreInfo) and (MulcolorNoOffset_xx_model(meIcon) or MulcolorNoOffset_xx_model(myDouyinID))then
 			click(343,680)mSleep(2000)
+			myToast("点击粉丝")
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(moreInfo) then
 			click(573,1085)
 			mSleep(1000)
+			myToast("点击我的")
 		--[[elseif _move >3 and MulcolorNoOffset_xx_model(myFunsIcon) then
 			runToast("私信完成")	
 			return --]]
@@ -1111,42 +1113,54 @@ function pm()
 				runToast("第6个坐标没有有粉丝...私信完成") 
 				return
 			end
-			click(389,1077)	mSleep(1000)		
+			click(389,1077)	
+			--mSleep(1000)		
+			myToast("点击第六个粉丝")
 		elseif _index==5 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(foucsFive)--]] then
 			
 			if getColor(401,921) == 0x0e0f1a then 
 				runToast("第5个坐标没有有粉丝...私信完成")
 				return 
 			end
-			click(401,921) mSleep(1000)		
+			click(401,921)
+			myToast("点击第五个粉丝")	
+			-- mSleep(1000)		
 		elseif _index==4 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusFour)--]] then
 			
 			if getColor(408,729) == 0x0e0f1a then 
 				runToast("第4个坐标没有有粉丝...私信完成")
 				return 
 			end
-			click(408,729) mSleep(1000)		
+			click(408,729) 
+			myToast("点击第四个粉丝")	
+			--mSleep(1000)		
 		elseif _index==3 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusThree)--]] then
 			
 			if getColor(413,567) == 0x0e0f1a then 
 				runToast("第3个坐标没有有粉丝...私信完成")			 
 				return
 			end
-			click(413,567) mSleep(1000)		
+			click(413,567) 
+			myToast("点击第三个粉丝")	
+			--mSleep(1000)		
 		elseif _index==2 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusTwo)--]] then
 			
 			if getColor(422,384) == 0x0e0f1a then 
 				runToast("第2个坐标没有有粉丝...私信完成")		
 				return
 			end
-			click(422,384)	mSleep(1000)		
+			click(422,384)	
+			myToast("点击第二个粉丝")		
+			--mSleep(1000)		
 		elseif _index==1 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusOne)--]] then
 			
 			if getColor(435,211) == 0x0e0f1a then 
 				runToast("第1个坐标没有有粉丝...私信完成")
 				return
 			end
-			click(435,211)	mSleep(1000)		
+			click(435,211)	
+			myToast("点击第一个粉丝")			
+			--mSleep(1000)		
 		--[[elseif _move >=1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
 			runToast("私信完成")
 			return	--]]		
@@ -1167,6 +1181,7 @@ function pm()
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
+			myToast("未聊模式:已经发送消息退出")
 		elseif chat == "未聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
 			inputText(contents)mSleep(500)
 			click(556,1088)
@@ -1175,6 +1190,7 @@ function pm()
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
+			myToast("未聊模式:发送消息")
 		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend) and MulcolorNoOffset_xx_model(keyboardSendBtn) then
 			inputText(contents)mSleep(500)
 			click(556,1088)
@@ -1183,14 +1199,21 @@ function pm()
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
+			myToast("已聊模式:已经聊过继续发送")
 		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
+			inputText(contents)mSleep(500)
+			click(556,1088)
+			inputText(wxid)mSleep(500)
+			click(556,1088)mSleep(500)
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
+			myToast("已聊模式:未聊过发送消息")
 		elseif _index == 7 and MulcolorNoOffset_xx_model(myFunsIcon) then
 			clickMove(288,976,317,285,10)mSleep(1000)
 			_index=1
 			_move=_move + 1
+			myToast("滑动一页")
 		end		
 		myIsFrontApp("com.ss.iphone.ugc.Aweme")
 	end
@@ -1201,7 +1224,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.25.04")
+runToast("抖音脚本开始运行...v05.26.01")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
@@ -1235,6 +1258,7 @@ elseif step == "私信" then
 			dialog("所有记录运行完毕",0)
 			lua_exit();   
 		end
+		changeAirplaneMode()
 	end	
 end
 
