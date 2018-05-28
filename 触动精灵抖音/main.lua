@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.26.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.28.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
@@ -13,8 +13,8 @@ UILabel("输入刷新次数")
 UIEdit("freshcts","输入刷新次数","",15,"left","255,0,0")
 UILabel("选择聊天对象")
 UICombo("chat","已聊,未聊")
-UILabel("是否删除还原计数")
-UICombo("del","no,yes")
+--[[UILabel("是否删除还原计数")
+UICombo("del","no,yes")--]]
 UILabel("私聊内容")
 UIEdit("contents","个性签名","",15,"left","255,0,0")
 UILabel("微信号码")
@@ -687,6 +687,43 @@ function nextRecordNZT()
 	end
 end
 
+
+--NZT全息备份下一条
+function nextNZTForDouYin()
+	runToast("NZT下一条记录...")
+	local nztInterface = {0xffffff,"0|3|0xffffff,0|7|0xffffff,2|7|0x007aff,2|2|0x007aff,4|2|0x007aff,4|6|0x007aff,7|6|0xffffff,7|3|0xffffff", 90, 303, 1036, 325, 1062}
+	local nextReord = {0x000000,"0|1|0x000000,-4|1|0xf9f9f9,-7|1|0xf9f9f9,-7|5|0xf9f9f9,-4|5|0xf9f9f9,0|5|0x000000,3|5|0xf9f9f9,7|5|0xf9f9f9", 90, 588, 79, 623, 93}
+	appKillAndRun("NZT")	
+	while 1 do
+		if MulcolorNoOffset_xx_model(nztInterface) then
+			--使用命令进行一件新机
+			openURL("nzt://cmd/nextrecord");mSleep(2000)
+			while 1 do
+				if MulcolorNoOffset_xx_model(nextReord) and MulcolorNoOffset_xx_model({0xffffff,"0|2|0xffffff,6|2|0x333333,6|-1|0x333333,10|0|0xffffff,10|2|0xffffff,16|2|0x333333,16|0|0x333333,20|0|0xffffff,20|1|0xffffff", 90, 421, 611, 454, 624}) then
+					runToast("nzt清理中")
+				elseif MulcolorNoOffset_xx_model(nextReord) and MulcolorNoOffset_xx_model({0xffffff,"0|2|0xffffff,6|2|0x333333,6|-1|0x333333,10|0|0xffffff,10|2|0xffffff,16|2|0x333333,16|0|0x333333,20|0|0xffffff,20|1|0xffffff", 90, 421, 611, 454, 624}) ==false then
+					break
+				end
+			end
+			for i=1,8 do
+				toast(string.format("等待NZT下一条记录结束还剩%s秒",8-i))
+				mSleep(1000)
+			end
+			--
+			if MulcolorNoOffset_xx_model({0x007aff,"1|1|0x007aff,3|4|0x007aff,6|4|0x007aff,9|2|0x007aff,11|0|0x007aff,13|-2|0x007aff,14|-3|0x007aff", 90, 573, 163, 613, 189}) and MulcolorNoOffset_xx_model({0x000000,"0|4|0x000000,0|7|0x000000,4|7|0xffffff,8|7|0xffffff,9|7|0xffffff,9|4|0xffffff,12|4|0x000000,12|7|0x000000,12|9|0x000000", 90, 74, 161, 96, 180}) then
+				dialog("已经运行完最后一条",1)
+				lua_exit();
+			end
+			--appKill("NZT")
+			pressHomeKey(0);    --按下 Home 键
+			pressHomeKey(1);    --抬起 Home 键
+			mSleep(2000)
+			break
+		else
+			appRun("NZT")
+		end
+	end
+end
 --将指定文件中的内容按行读取
 function readFile(path)
     local file = io.open(path,"r");
@@ -1087,6 +1124,8 @@ keyboardSendBtn = {0xfeffff,"10|0|0xfeffff,10|4|0x007aff,8|4|0x007aff,1|4|0x007a
 finishedSend = {0xeba825,"0|4|0xeba825,0|7|0xeba825,0|10|0xeba825,0|13|0xeba825,0|16|0xeba825,0|19|0xeba825,0|23|0xeba825", 90, 491, 195, 539, 407}
 --暂时没有更多了
 noMoreNow ={0x0e0f1a,"0|2|0x0e0f1a,0|4|0x0e0f1a,2|4|0x0e0f1a,2|2|0x0e0f1a,2|0|0x0e0f1a,4|0|0x0e0f1a,4|-2|0x0e0f1a", 90, 204, 1114, 217, 1129}
+--绑定手机号，找到更多可能认识的人
+closeTipsForMobile = {0xface15,"5|5|0xface15,9|8|0xface15,12|12|0xface15,14|14|0xface15,16|16|0xface15,18|18|0xface15,0|17|0xface15,2|15|0xface15", 90, 572, 91, 605, 124}
 --私信粉丝
 function pm()
 	runToast("私信粉丝")
@@ -1094,19 +1133,16 @@ function pm()
 	local _index = 1
 	local _move = 1
 	while 1 do
-		if MulcolorNoOffset_xx_model(moreInfo) and (MulcolorNoOffset_xx_model(meIcon) or MulcolorNoOffset_xx_model(myDouyinID))then
+		if 	MulcolorNoOffset_xx_model(moreInfo) and (MulcolorNoOffset_xx_model(meIcon) or MulcolorNoOffset_xx_model(myDouyinID)) and MulcolorNoOffset_xx_model(closeTipsForMobile) then
 			click(343,680)mSleep(2000)
+			myToast("点击粉丝")			
+		elseif MulcolorNoOffset_xx_model(moreInfo) and (MulcolorNoOffset_xx_model(meIcon) or MulcolorNoOffset_xx_model(myDouyinID))then
+			click(337,599)mSleep(2000)
 			myToast("点击粉丝")
 		elseif MulcolorNoOffset_xx_model(recomIcon) and MulcolorNoOffset_xx_model(moreInfo) then
 			click(573,1085)
 			mSleep(1000)
 			myToast("点击我的")
-		--[[elseif _move >3 and MulcolorNoOffset_xx_model(myFunsIcon) then
-			runToast("私信完成")	
-			return --]]
-		--[[elseif _move >1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
-			runToast("私信完成")
-			return--]]
 		elseif _index==6 and MulcolorNoOffset_xx_model(myFunsIcon) --[[and MulcolorNoOffset_xx_model(focusSix) --]]then
 			
 			if getColor(389,1077) == 0x0e0f1a then 
@@ -1161,22 +1197,25 @@ function pm()
 			click(435,211)	
 			myToast("点击第一个粉丝")			
 			--mSleep(1000)		
-		--[[elseif _move >=1 and MulcolorNoOffset_xx_model(myFunsIcon) and MulcolorNoOffset_xx_model(noMoreNow) then
-			runToast("私信完成")
-			return	--]]		
 		elseif MulcolorNoOffset_xx_model(continueToPlay) then
 			click(x,y)mSleep(1000)			
+			myToast("点击继续播放")
 		elseif MulcolorNoOffset_xx_model(cancelBtn) then
 			click(195,709)
+			myToast("点击取消")
 		elseif MulcolorNoOffset_xx_model(rejectLocation) then
 			click(177,718)
+			myToast("拒绝获取地理位置")
 		elseif MulcolorNoOffset_xx_model(sliderToMore) then
 			click(319,1084)	
 			mSleep(1000)		
+			myToast("滑动查看更多")
 		elseif MulcolorNoOffset_xx_model(followBtn) or MulcolorNoOffset_xx_model(followBtnOne) then
 			click(37,81)
-		elseif MulcolorNoOffset_xx_model(douyinID) then
-			click(431,263)
+			myToast("出现关注按钮返回")
+		elseif MulcolorNoOffset_xx_model(keyboardSendBtn) == false and MulcolorNoOffset_xx_model(myFunsIcon)==false and MulcolorNoOffset_xx_model(douyinID) then
+			click(420,263)
+			myToast("发送消息按钮")
 		elseif chat == "未聊" and MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
 			click(35,83)mSleep(1500)
 			click(35,83)
@@ -1210,6 +1249,7 @@ function pm()
 			_index = _index + 1
 			myToast("已聊模式:未聊过发送消息")
 		elseif _index == 7 and MulcolorNoOffset_xx_model(myFunsIcon) then
+			mSleep(2000)
 			clickMove(288,976,317,285,10)mSleep(1000)
 			_index=1
 			_move=_move + 1
@@ -1224,13 +1264,14 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.26.01")
+runToast("抖音脚本开始运行...v05.28.01")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
 		loginQQ()
 		if loadDouYin() then
 			followDouYin()
+			appKill("com.ss.iphone.ugc.Aweme")
 			newPhoneByNZT()
 			changeAirplaneMode()
 		else
@@ -1250,21 +1291,16 @@ elseif step == "私信" then
 	end
 	while 1 do	
 		pm()
-		nextRecordNZT()
-		record()
-		local cur = getRecord()
-		local total = getNZTRecordCount()
-		if cur > total then
-			dialog("所有记录运行完毕",0)
-			lua_exit();   
-		end
+		appKill("com.ss.iphone.ugc.Aweme")
+		nextNZTForDouYin()
+		--record()
+		--local cur = getRecord()
+		--local total = getNZTRecordCount()
+		--if cur > total then
+			--dialog("所有记录运行完毕",0)
+			--lua_exit();
+		--end
+		
 		changeAirplaneMode()
-	end	
+	end
 end
-
-
-
-
-
-
-
