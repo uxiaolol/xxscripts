@@ -1217,26 +1217,29 @@ function pm()
 			click(420,263)
 			myToast("发送消息按钮")
 		elseif chat == "未聊" and MulcolorNoOffset_xx_model(keyboardSendBtn) and MulcolorNoOffset_xx_model(finishedSend) then
+			
 			click(35,83)mSleep(1500)
 			click(35,83)
 			_index = _index + 1
 			myToast("未聊模式:已经发送消息退出")
 		elseif chat == "未聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
-			inputText(contents)mSleep(500)
-			click(556,1088)
-			inputText(wxid)mSleep(500)
-			click(556,1088)mSleep(500)
-			click(35,83)mSleep(1500)
-			click(35,83)
+			mSleep(1000)
+			inputText(contents)mSleep(1000)
+			click(556,1088)mSleep(1000)
+			inputText(wxid)mSleep(1000)
+			click(556,1088)mSleep(1000)
+			click(35,83)mSleep(1000)
+			click(35,83)mSleep(1000)
 			_index = _index + 1
 			myToast("未聊模式:发送消息")
 		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend) and MulcolorNoOffset_xx_model(keyboardSendBtn) then
-			inputText(contents)mSleep(500)
-			click(556,1088)
-			inputText(wxid)mSleep(500)
-			click(556,1088)mSleep(500)
-			click(35,83)mSleep(1500)
-			click(35,83)
+			mSleep(1000)
+			inputText(contents)mSleep(1000)
+			click(556,1088)mSleep(1000)
+			inputText(wxid)mSleep(1000)
+			click(556,1088)mSleep(1000)
+			click(35,83)mSleep(1000)
+			click(35,83)mSleep(1000)
 			_index = _index + 1
 			myToast("已聊模式:已经聊过继续发送")
 		elseif chat == "已聊" and MulcolorNoOffset_xx_model(finishedSend)==false and MulcolorNoOffset_xx_model(keyboardSendBtn) then
