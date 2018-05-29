@@ -7,6 +7,8 @@ local w,h = getScreenSize();
 w,h = getScreenSize()
 UINew("抖音05.28.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 UILabel("作者qq:234154812")
+UILabel("输入好爱答题密码串")
+UIEdit("haoaiid","输入好爱答题密码串","",15,"left","255,0,0")
 UILabel("选择脚本功能")
 UICombo("step","关注,私信")
 UILabel("输入刷新次数")
@@ -748,7 +750,7 @@ function haoai()
 	["y2"]=572,
 	["type"]="8006", --打码类型，可在对应平台官网查询
 	["username"]="gaopanhao", --打码平台账号
-	["password"]="gaopanhao|AA8C0B5892990D1F", --打码平台密码
+	["password"]=haoaiid, --打码平台密码
 	--选填参数
 	["length"]=4, --打码长度
 	["timeout"]=30, --超时时间
