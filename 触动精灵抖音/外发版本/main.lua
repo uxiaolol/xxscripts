@@ -5,7 +5,7 @@ local sz = require("sz")
 local cjson = sz.json
 local w,h = getScreenSize();
 w,h = getScreenSize()
-UINew("抖音05.28.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
+UINew("抖音05.31.01","运行脚本","退出脚本","uiconfig.dat",0,120,w*0.9,h*0.9,"255,231,186","255,231,186") --方式一，宽高为屏幕的 90%
 UILabel("作者qq:234154812")
 UILabel("输入好爱答题密码串")
 UIEdit("haoaiid","输入好爱答题密码串","",15,"left","255,0,0")
@@ -1040,6 +1040,8 @@ maleIcon = {0xa2a0a0,"4|0|0xa3a1a2,4|3|0xa3a0a2,-2|5|0xa3a0a1,-5|3|0xa3a0a1,0|10
 --女性
 femaleIcon = {0xadb0b2,"0|3|0xadb1b3,2|2|0xadb1b3,3|-3|0xadb1b3,3|-6|0xaeb1b3,3|-7|0xaeb1b3,7|0|0xaeb1b3,11|0|0xaeb1b3", 85, 31, 589, 56, 612}
 --弹出举报界面
+--举报
+_举报 = { 0x007aff, "12|0|0x007aff,17|8|0x007aff,4|9|0x007aff,3|22|0x007aff,32|14|0x007aff", 90, 267, 898, 371, 961}
 --抖音关注
 function followDouYin()
 	runToast("抖音关注")
@@ -1087,6 +1089,8 @@ function followDouYin()
 			_slidects = _slidects + 1
 		elseif MulcolorNoOffset_xx_model(keyBoard) then
 			click(x,y-70)
+		elseif MulcolorNoOffset_xx_model(_举报) then
+			click(353,669)--点击空白处			
 		--	
 		end
 		myIsFrontApp("com.ss.iphone.ugc.Aweme")
@@ -1269,7 +1273,7 @@ function allSteps()
 end
 
 init("0",0)
-runToast("抖音脚本开始运行...v05.28.01")
+runToast("抖音脚本开始运行...v05.31.01")
 if step == "关注" then
 	runToast("您选择了关注功能")
 	while 1 do
