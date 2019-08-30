@@ -107,6 +107,7 @@ W	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	883;"	e
 X	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\md5.lua	370;"	e
 _	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	589;"	e
 _	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	600;"	e
+_Account	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	187;"	e
 _DESCRIPTION	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\md5.lua	3;"	e
 _LICENSE	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\md5.lua	5;"	e
 _M	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	19;"	e
@@ -195,11 +196,11 @@ __index:sink(snk,	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\tp.lua	76
 __index:source(source,	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\tp.lua	101;"	f
 __index:type(type)	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	166;"	f
 __tostring()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	955;"	f
-_acc	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	124;"	e
+_acc	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	138;"	e
 _e	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	591;"	e
 _e	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	597;"	e
 _len	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	592;"	e
-_pwd	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	131;"	e
+_pwd	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	145;"	e
 _rand	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	955;"	e
 _s	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	590;"	e
 _s	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	596;"	e
@@ -393,7 +394,7 @@ close()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	184;"	f
 close()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	179;"	f
 close()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\smtp.lua	73;"	f
 close()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\tp.lua	108;"	f
-closeWin	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	51;"	f
+closeWin	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	93;"	f
 cmd	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\tp.lua	68;"	e
 cmdt	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	268;"	e
 cmpColor	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\utils.lua	58;"	f
@@ -454,7 +455,7 @@ default	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	217;"	e
 default	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	241;"	e
 default_pretty_indent	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	289;"	e
 default_pretty_options	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	290;"	e
-denglu	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	104;"	f
+denglu	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	118;"	f
 dirty	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	68;"	e
 dirty	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	94;"	e
 dirty	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\socket.lua	112;"	e
@@ -593,7 +594,7 @@ host	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	212;"	e
 host	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	242;"	e
 http	D:/mygithub/xxscripts/安卓敢达/xsp/src\badboy.lua	71;"	e
 http	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	35;"	e
-http	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	79;"	e
+http	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	55;"	e
 i	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	413;"	e
 i	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	420;"	e
 i	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	427;"	e
@@ -627,7 +628,7 @@ id	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	52;"	e
 id	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	66;"	e
 id	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	97;"	e
 imei	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	37;"	e
-imei	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	81;"	e
+imei	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	57;"	e
 indent	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	862;"	e
 index	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\pos.lua	30;"	e
 index	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ltn12.lua	57;"	e
@@ -639,12 +640,14 @@ ip	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ftp.lua	74;"	e
 isArray	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	292;"	e
 isColorClick(s)	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\pos.lua	98;"	f
 isEmailAddress	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	551;"	f
+isGameRunning	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	81;"	f
 isKeepScreen	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\utils.lua	61;"	e
 isObject	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	293;"	e
 isRepetition	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	516;"	f
 isRepetitionWS	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	522;"	f
 is_page_style	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	226;"	e
-isok	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	108;"	e
+isfront	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	83;"	e
+isok	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	122;"	e
 iv	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	956;"	e
 iv	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	957;"	e
 j	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	962;"	e
@@ -654,7 +657,7 @@ j	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	988;"	e
 j	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\mbox.lua	72;"	e
 json_string_literal	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	711;"	f
 jumble	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	647;"	f
-juqing	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	162;"	f
+juqing	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	177;"	f
 k	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	835;"	e
 kbtype	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	101;"	e
 key	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	959;"	e
@@ -662,7 +665,7 @@ key	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	978;"	e
 keyLen	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	961;"	e
 keyLen	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	980;"	e
 key_indent	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	906;"	e
-kill	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	97;"	f
+kill	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	73;"	f
 l	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	931;"	e
 l	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	942;"	e
 last	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	312;"	e
@@ -712,7 +715,7 @@ ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\mime.lua	11;"	e
 ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\smtp.lua	17;"	e
 ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\tp.lua	13;"	e
 ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	36;"	e
-ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	80;"	e
+ltn12	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	56;"	e
 mail(from)	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\smtp.lua	50;"	f
 make_set	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	44;"	f
 map	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	776;"	e
@@ -963,7 +966,7 @@ receiveheaders()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	1
 receivestatusline()	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	146;"	f
 reduced	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	97;"	e
 relative_parsed	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	228;"	e
-releaseGdAccount	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	76;"	f
+releaseGdAccount	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	52;"	f
 remainder	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	325;"	e
 remainder	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	354;"	e
 remainder	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	356;"	e
@@ -1001,7 +1004,7 @@ result_value	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\JSON.lua	932;"	e
 ret	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	29;"	e
 ret	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	30;"	e
 ret	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	34;"	e
-ret	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	109;"	e
+ret	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	123;"	e
 retry	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ltn12.lua	47;"	e
 retry	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ltn12.lua	49;"	e
 rewind(src)	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\ltn12.lua	128;"	f
@@ -1313,10 +1316,10 @@ tredirect	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	284;"	f
 trequest	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\http.lua	302;"	f
 trim	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	490;"	f
 trim()	D:/mygithub/xxscripts/安卓敢达/xsp/src\badboy.lua	35;"	f
-tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	107;"	e
-tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	113;"	e
-tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	132;"	e
-tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	136;"	e
+tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	121;"	e
+tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	127;"	e
+tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	146;"	e
+tt	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	150;"	e
 type	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	111;"	e
 type	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	153;"	e
 type	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\UI.lua	39;"	e
@@ -1344,7 +1347,7 @@ url	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	148;"	e
 url	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	153;"	e
 url	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\socket\url.lua	187;"	e
 url	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	39;"	e
-url	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	84;"	e
+url	D:/mygithub/xxscripts/安卓敢达/xsp/src\main.lua	60;"	e
 urlDecode	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	529;"	f
 urlEncode	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	539;"	f
 usedNums	D:/mygithub/xxscripts/安卓敢达/xsp/src\bblibs\StrUtilsAPI.lua	654;"	e

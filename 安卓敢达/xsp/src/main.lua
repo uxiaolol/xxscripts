@@ -36,7 +36,7 @@ function getGdAccount()
 	local ltn12 = bb.ltn12
 	local imei = getDeviceIMEI()
 	while 1 do
-		local url = string.format('http://192.168.1.6:8080/game/servlet/game?action=getAccGdAndroidTest&imei=%s',imei)
+		local url = string.format('http://192.168.1.200:8080/game/servlet/game?action=getAccGdAndroidTest&imei=%s',imei)
 		res, code = http.request(url)
 		if code == 200 then
 			sysLog(res)
@@ -45,6 +45,48 @@ function getGdAccount()
 			toast("获取安卓敢达账号失败...稍后再试")
 			mSleep(3000)
 		end
+	end
+end
+
+--安卓敢达释放账号
+function releaseGdAccount(acc,diamond,normal,strong)
+	sysLog("releaseGdAccount")
+	bb.loadluasocket()
+	local http = bb.http
+	local ltn12 = bb.ltn12
+	local imei = getDeviceIMEI()
+	sysLog(imei)
+	while 1 do
+		local url = string.format('http://192.168.1.200:8080/game/servlet/game?action=releaseAccGdAndroidTest&account=%s&imei=%s&diamonds=%s&normal=%s&strong=%s',acc,imei,diamond,normal,strong)
+		sysLog(url)
+		res, code = http.request(url)
+		if code == 200 then
+			--sysLog(res)
+			return res
+		else
+			toast("释放安卓敢达账号失败...稍后再试")
+			mSleep(3000)
+		end
+	end
+end
+--关闭重开游戏
+function kill(pkg_name)
+	closeApp(pkg_name)
+	mSleep(2000)
+	runApp(pkg_name)
+	mSleep(2000)
+end
+
+--游戏是否在前台运行
+function isGameRunning(appName)
+	while true do
+		local isfront = isFrontApp(appName); --更新前台状态
+		if isfront == 1 then
+			break
+		else
+			runApp(appName)
+		end		
+		mSleep(3000)
 	end
 end
 --关闭弹窗
@@ -72,34 +114,6 @@ function closeWin()
 		sysLog("实名认证")	
 	end
 end
---安卓敢达释放账号
-function releaseGdAccount(acc,diamond,normal,strong)
-	sysLog("releaseGdAccount")
-	bb.loadluasocket()
-	local http = bb.http
-	local ltn12 = bb.ltn12
-	local imei = getDeviceIMEI()
-	sysLog(imei)
-	while 1 do
-		local url = string.format('http://192.168.1.6:8080/game/servlet/game?action=releaseAccGdAndroidTest&account=%s&imei=%s&diamonds=%s&normal=%s&strong=%s',acc,imei,diamond,normal,strong)
-		sysLog(url)
-		res, code = http.request(url)
-		if code == 200 then
-			--sysLog(res)
-			return res
-		else
-			toast("释放安卓敢达账号失败...稍后再试")
-			mSleep(3000)
-		end
-	end
-end
---关闭重开游戏
-function kill(pkg_name)
-	closeApp(pkg_name)
-	mSleep(2000)
-	runApp(pkg_name)
-	mSleep(2000)
-end
 --登录部分
 function denglu()
 	sysLog("denglu")
@@ -108,7 +122,7 @@ function denglu()
 	local isok = false
 	local ret = Split(_Account,"#")
 	while 1 do
-		if os.difftime(os.time(),tt) > 180 then
+		if os.difftime(os.time(),tt) > 240 then
 			kill(app_name)
 			tt = os.time()
 			sysLog("denglu chaoshi")
@@ -156,6 +170,7 @@ function denglu()
 			click(681,154)
 			sysLog("实名认证")
 		end
+		isGameRunning(app_name)
 	end
 end
 --剧情部分
@@ -169,9 +184,8 @@ end
 
 
 setSysConfig("isLogFile","1")
---_Account = getGdAccount()
---denglu()
-juqing()
+_Account = getGdAccount()
+denglu()
 
 --fileLogWrite("test",1,"INFO","test")
 
